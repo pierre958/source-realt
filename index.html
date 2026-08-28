@@ -137,6 +137,43 @@ h1 .light{color:var(--muted);font-weight:400;}
 .card .cta{font-size:13px;font-weight:600;color:var(--green);margin-top:14px;padding-top:12px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:8px;}
 .card .cta .arw{transition:transform .18s;}
 
+/* ---------------------------------------------------------------------
+   LISIBILITÉ DES CARTES DE PROFIL
+   Le parcours démarre ici : la carte doit se lire comme un bouton, pas
+   comme un encadré de texte. Bordure affirmée, pastille d'icône colorée,
+   et appel à l'action rendu sous forme de bouton plein.
+   --------------------------------------------------------------------- */
+.pick{padding:4px 0 20px;}
+.pick-sub{margin-bottom:20px;}
+.pick-grid{gap:16px;align-items:stretch;}
+
+.profile-card{border:1.5px solid var(--line);padding:22px 20px 20px;
+  box-shadow:0 1px 3px rgba(25,40,33,.04);}
+.profile-card .cnum{color:var(--sand-ink);opacity:.75;margin-bottom:14px;}
+.profile-card h3{font-size:19px;font-weight:700;letter-spacing:-.015em;margin-bottom:12px;}
+.profile-card p{font-size:13.5px;}
+
+/* Pastille d'icône : donne un point d'accroche visuel à chaque profil. */
+.profile-card .ico{height:auto;margin-bottom:14px;display:block;}
+.profile-card .ico svg{width:26px;height:26px;padding:9px;box-sizing:content-box;
+  background:var(--green-soft);border-radius:50%;transition:background .18s,transform .18s;}
+
+/* L'appel à l'action prend l'apparence d'un bouton plein : c'est le signal
+   principal que la carte entière est cliquable. */
+.profile-card .cta{margin-top:16px;padding-top:0;border-top:none;
+  background:var(--green);color:#fff;border-radius:var(--rs);
+  padding:11px 14px;font-size:13.5px;font-weight:600;
+  transition:background .18s;}
+
+@media(hover:hover) and (pointer:fine){
+  .profile-card:hover{background:var(--surface);border-color:var(--green);
+    box-shadow:0 8px 22px rgba(25,40,33,.10);transform:translateY(-2px);}
+  .profile-card:hover .cta{background:var(--green-hover);}
+  .profile-card:hover .ico svg{background:var(--sand-soft);transform:translateY(-2px);}
+}
+.profile-card{transition:background .18s,border-color .18s,box-shadow .18s,transform .18s;}
+.profile-card:active{transform:translateY(0) scale(.995);border-color:var(--green);}
+
 /* ---------- QUI NOUS SOMMES ---------- */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
 @media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:26px;}}
@@ -1154,6 +1191,7 @@ const PROFILES = {
     communeLabel:"Commune du bien",
     typeLabel:"Type de bien",
     hideRelation:true,
+    sansDocument:true,
     condH:"Vendre directement à RealT",
     condCta:"Échanger sur mon bien",
     condOutro:"Une question sur la façon dont nous procédons ? Nous en parlerons lors de l'échange.",
@@ -1694,6 +1732,23 @@ function goSchedule(){
 
 /* Le widget est monté à chaque passage, avec les informations déjà saisies :
    le visiteur n'a pas à retaper son nom ni son e-mail. */
+var CALENDLY_CHARGE = false;
+var CALENDLY_TIMER = null;
+
+/* Affiché uniquement si le calendrier intégré ne s'est pas manifesté :
+   le visiteur peut toujours réserver, dans un nouvel onglet. */
+function replisCalendly(){
+  if(CALENDLY_CHARGE) return;
+  var banner = $("slots-state");
+  if(banner){
+    banner.className = "info-block warn on";
+    banner.innerHTML = "<strong>Le calendrier met du temps à s'afficher.</strong> " +
+      "Vous pouvez réserver directement : " +
+      "<a href='" + CONFIG.calendlyUrl + "' target='_blank' rel='noopener'>ouvrir le calendrier</a>. " +
+      "Sinon, écrivez-nous à <a href='mailto:" + CONFIG.emailContact + "'>" + CONFIG.emailContact + "</a>.";
+  }
+}
+
 function monterCalendly(){
   var embed=$("calendly-embed");
   if(!embed) return;
@@ -1713,6 +1768,12 @@ function monterCalendly(){
     },250);
     return;
   }
+
+  /* Filet de sécurité : si Calendly ne signale pas son chargement, on
+     propose un lien direct plutôt que de laisser un cadre vide. */
+  CALENDLY_CHARGE = false;
+  clearTimeout(CALENDLY_TIMER);
+  CALENDLY_TIMER = setTimeout(replisCalendly, 8000);
 
   window.Calendly.initInlineWidget({
     url: CONFIG.calendlyUrl + "?hide_gdpr_banner=1&primary_color=21453A",
@@ -1734,6 +1795,11 @@ function initCalendlyEcoute(){
   window.addEventListener("message", function(e){
     if(!e.data || typeof e.data.event !== "string") return;
     if(e.data.event.indexOf("calendly") !== 0) return;
+    /* Tout message Calendly prouve que l'iframe est vivante. */
+    CALENDLY_CHARGE = true;
+    clearTimeout(CALENDLY_TIMER);
+    var b = $("slots-state");
+    if(b && b.className.indexOf("warn") !== -1){ b.className = "info-block"; b.innerHTML = ""; }
     if(e.data.event === "calendly.event_scheduled"){
       opp.statut="Rendez-vous prévu";
       opp.entretien.evenementCalendrier = (e.data.payload && e.data.payload.event && e.data.payload.event.uri) || null;
