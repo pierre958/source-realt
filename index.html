@@ -1,0 +1,2175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>SOURCE by RealT — Présenter une opportunité</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 400'%3E%3Cpath fill='%23C3AB98' d='M198 16 C122 42 44 100 35 162 C28 212 68 244 132 258 C88 230 74 200 84 170 C99 122 145 58 198 16 Z'/%3E%3Cpath fill='%23263F34' d='M108 146 C174 168 206 208 200 254 C193 306 138 350 40 382 C128 342 170 300 174 256 C179 210 150 176 108 146 Z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<style>
+:root{
+  --bg:#F6F5F1; --surface:#FFFFFF;
+  --ink:#202522; --muted:#66706B;
+  --green:#21453A; --green-medium:#3F6658; --green-soft:#E9F0EC; --green-hover:#18372E;
+  --line:#DDE1DD; --line-hover:#AFC0B7;
+  --sand:#B99F87; --sand-soft:#F2ECE6; --sand-ink:#7E6248;
+  --success:#2F7155; --warning:#B67A38; --error:#A8483A;
+  --tint:#F2F6F3; --neutral:#F7F7F5;
+  --steel:#66706B;
+  --r:8px; --rs:7px;
+  --shadow:0 2px 10px rgba(25,40,33,.035);
+
+  /* ------------------------------------------------------------------
+     TYPOGRAPHIE — la police officielle de RealT reste à fournir.
+     Remplacer alors uniquement la première valeur de --font-primary.
+     ------------------------------------------------------------------ */
+  --font-primary:'DM Sans','Inter','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --font-secondary:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+  --mono:var(--font-mono);
+  --sans:var(--font-primary);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-primary);font-weight:400;line-height:1.55;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);}
+button,a,[role=button]{-webkit-tap-highlight-color:rgba(33,69,58,.08);}
+.wrap{max-width:1120px;margin:0 auto;padding:30px 32px 96px;}
+@media(max-width:760px){.wrap{padding:20px 18px 88px;}}
+:focus-visible{outline:2px solid var(--green-medium);outline-offset:2px;border-radius:3px;}
+
+.tlab{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+
+/* ---------- EN-TÊTE ---------- */
+header.site{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:20px;border-bottom:1px solid var(--line);}
+.brand{display:flex;align-items:center;gap:12px;cursor:pointer;}
+.brand img{height:34px;width:auto;display:none;}
+.brand img.ready{display:block;}
+.brand .fallback{display:flex;align-items:center;gap:12px;}
+.brand.has-logo .fallback{display:none;}
+.brand.has-logo .logo-mobile{display:none;}
+@media(max-width:560px){.brand.has-logo .logo-desktop{display:none;} .brand.has-logo .logo-mobile.ready{display:block;height:28px;}}
+.brand .sig{height:40px;width:auto;flex-shrink:0;}
+.sig-a{fill:var(--sand);}
+.sig-b{fill:var(--green);}
+.brand .sig-rule{width:1px;height:32px;background:var(--line);flex-shrink:0;}
+.brand .lock{display:flex;flex-direction:column;}
+.brand .lock .w{font-size:16px;font-weight:500;letter-spacing:.34em;text-indent:.34em;color:var(--green);line-height:1;}
+.brand .lock .b{font-size:11px;letter-spacing:.16em;text-indent:.16em;color:var(--muted);margin-top:6px;text-align:center;}
+.brand .lock .b i{color:var(--sand-ink);font-style:italic;letter-spacing:.08em;}
+@media(max-width:560px){.brand{gap:9px;} .brand .sig{height:30px;} .brand .sig-rule{height:24px;} .brand .lock .w{font-size:13px;letter-spacing:.26em;text-indent:.26em;} .brand .lock .b{font-size:10px;}}
+.head-right{display:flex;align-items:center;gap:20px;}
+.head-tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+@media(max-width:820px){.head-tag{display:none;}}
+.head-link{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--green);text-decoration:none;display:inline-flex;gap:5px;align-items:center;}
+.head-link:hover{text-decoration:underline;}
+.step-index{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);}
+@media(max-width:560px){.step-index{display:none;}}
+
+.screen{display:none;}
+.screen.active{display:block;animation:fade .22s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);}}
+
+/* ---------- HERO ---------- */
+.hero{padding:64px 0 60px;max-width:680px;}
+@media(max-width:940px){.hero{padding:38px 0 42px;}}
+.hero-left{display:flex;flex-direction:column;}
+.hero-label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1.9;margin-bottom:24px;}
+.hero-label b{color:var(--green);font-weight:500;}
+h1{font-size:56px;font-weight:500;line-height:1.03;letter-spacing:-.028em;margin-bottom:24px;}
+h1 .light{color:var(--muted);font-weight:400;}
+@media(max-width:1000px){h1{font-size:46px;}}
+@media(max-width:560px){h1{font-size:34px;letter-spacing:-.02em;}}
+.hero-rule{width:42px;height:2px;background:var(--sand);margin-bottom:22px;}
+.hero .promise{font-size:16px;color:var(--ink);background:var(--tint);border-left:3px solid var(--green-medium);border-radius:0 var(--rs) var(--rs) 0;padding:14px 16px;margin-bottom:20px;line-height:1.5;}
+.hero p{font-size:15px;color:var(--steel);line-height:1.6;margin-bottom:18px;}
+.hero-bul{list-style:none;margin:0 0 24px;}
+.hero-bul li{position:relative;padding-left:24px;font-size:14.5px;color:var(--ink);line-height:1.5;margin-bottom:9px;}
+.hero-bul li::before{content:'';position:absolute;left:0;top:7px;width:9px;height:9px;border-radius:50%;border:2px solid var(--sand);}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.btn-lg{min-height:54px;font-size:15.5px;padding:0 26px;}
+.hero-hint{font-size:13px;color:var(--muted);margin-top:14px;}
+
+/* ---------- ÉCRAN DE CHOIX DU PROFIL ---------- */
+.pick{padding:8px 0 20px;max-width:780px;}
+.pick-label{font-family:var(--mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--sand-ink);margin-bottom:12px;}
+.pick-h{font-size:38px;font-weight:500;letter-spacing:-.026em;line-height:1.1;margin-bottom:12px;}
+@media(max-width:560px){.pick-h{font-size:29px;}}
+.pick-sub{font-size:15px;color:var(--steel);line-height:1.6;margin-bottom:28px;max-width:520px;}
+.pick-grid{gap:14px;}
+
+
+/* ---------- SECTIONS ---------- */
+.sec{padding:44px 0;border-top:1px solid var(--line);}
+.sec-title{display:flex;align-items:baseline;gap:14px;margin-bottom:28px;}
+.sec-num{font-family:var(--mono);font-size:11px;letter-spacing:.09em;color:var(--sand-ink);}
+.sec-name{font-family:var(--mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);}
+.sec-line{flex:1;height:1px;background:var(--line);}
+
+/* ---------- CARTES PROFIL ---------- */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:620px){.grid{grid-template-columns:1fr;}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:20px 18px;cursor:pointer;display:flex;flex-direction:column;transition:background .18s,border-color .18s,box-shadow .18s;
+  width:100%;text-align:left;font-family:inherit;color:inherit;appearance:none;-webkit-appearance:none;touch-action:manipulation;}
+.card{-webkit-user-select:none;user-select:none;}
+/* Le tap doit toujours atteindre le bouton : sans cela, toucher un texte
+   interne peut démarrer une sélection sur iOS et annuler le clic. */
+.card .cnum,.card h3,.card .ico,.card .ico svg,.card .ico svg *,.card p,.card .cta,.card .cta *{pointer-events:none;}
+.slot span,.choice-card .ct,.choice-card .cd{pointer-events:none;}
+.card:active{background:var(--tint);transform:scale(.995);}
+.slot,.choice-card{-webkit-user-select:none;user-select:none;}
+@media(hover:hover) and (pointer:fine){.card:hover{background:var(--tint);border-color:var(--line-hover);box-shadow:0 4px 14px rgba(25,40,33,.05);}
+.card:hover .cta .arw{transform:translateX(4px);}}
+.card:focus{outline:none;}
+.card:focus-visible{outline:2px solid var(--green-medium);outline-offset:2px;}
+.card .cnum{font-family:var(--mono);font-size:11px;letter-spacing:.09em;color:var(--muted);margin-bottom:11px;}
+.card h3{font-size:15px;font-weight:600;letter-spacing:-.005em;margin-bottom:13px;line-height:1.3;}
+.card .ico{margin-bottom:13px;height:40px;display:flex;align-items:flex-end;}
+.card .ico svg{width:38px;height:38px;transition:transform .18s;}
+.card:hover .ico svg{transform:translateY(-2px);}
+.ic{stroke:var(--green);fill:none;}
+.ic-dot{fill:var(--sand);stroke:none;}
+.card p{color:var(--steel);font-size:13px;line-height:1.5;flex:1;}
+.card .cta{font-size:13px;font-weight:600;color:var(--green);margin-top:14px;padding-top:12px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.card .cta .arw{transition:transform .18s;}
+
+/* ---------- QUI NOUS SOMMES ---------- */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+@media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:26px;}}
+.about-keys{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.about-key{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;}
+.about-key .k{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.about-key .v{font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:1.3;}
+.about-key .v small{display:block;font-size:12.5px;font-weight:400;color:var(--steel);letter-spacing:0;margin-top:4px;}
+.about h3{font-size:26px;font-weight:500;letter-spacing:-.022em;margin-bottom:16px;}
+.about p{font-size:14.5px;color:var(--steel);margin-bottom:13px;line-height:1.65;}
+.about p strong{color:var(--ink);font-weight:600;}
+.about-link{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:20px;}
+.about-people{font-size:13px;color:var(--muted);}
+
+/* ---------- FRISE ÉTAPES ---------- */
+.railA{display:flex;align-items:stretch;gap:22px;}
+@media(max-width:820px){.railA{flex-direction:column;gap:0;}}
+.stepA{flex:1;}
+.stepA:not(:last-child){border-right:1px solid var(--line);padding-right:22px;}
+@media(max-width:820px){.stepA:not(:last-child){border-right:none;border-bottom:1px solid var(--line);padding:0 0 18px;margin-bottom:18px;}}
+.stepA .hdr{display:flex;align-items:center;gap:9px;margin-bottom:9px;}
+.stepA .num{font-family:var(--mono);font-size:11px;letter-spacing:.07em;color:var(--green);}
+.stepA .arw{color:var(--sand-ink);font-size:12px;line-height:1;}
+.stepA .t{font-size:14.5px;font-weight:600;margin-bottom:6px;}
+.stepA .d{font-size:13.5px;color:var(--steel);line-height:1.55;}
+
+/* ---------- PARCOURS ---------- */
+.flow-header{display:flex;align-items:center;gap:8px;margin:24px 0 22px;flex-wrap:wrap;}
+.back-btn{font-family:var(--font-primary);font-size:13px;font-weight:500;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:var(--rs);padding:9px 14px;cursor:pointer;min-height:44px;transition:border-color .15s,color .15s,background .15s;}
+.back-btn:hover{border-color:var(--green-medium);color:var(--green);background:var(--tint);}
+.flow-title{font-size:15px;font-weight:600;margin-left:6px;}
+
+.steps-bar{display:flex;align-items:center;margin-bottom:28px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;}
+.steps-bar::-webkit-scrollbar{display:none;}
+.sb{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--muted);flex-shrink:0;}
+.sb .dot{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;flex-shrink:0;}
+.sb.done{color:var(--green);}
+.sb.done .dot{background:var(--green);border-color:var(--green);color:#fff;}
+.sb.now{color:var(--green);font-weight:600;}
+.sb.now .dot{background:var(--green-soft);border-color:var(--green-medium);border-width:1.5px;color:var(--green);}
+.sb-sep{flex:1;height:1px;background:var(--line);margin:0 10px;min-width:14px;}
+@media(max-width:700px){.sb span:not(.dot){display:none;} .sb-sep{margin:0 6px;min-width:18px;}}
+
+.q-block{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:32px;margin-bottom:16px;}
+@media(max-width:560px){.q-block{padding:22px 18px;}}
+.q-block .label{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
+.q-block h2{font-size:28px;font-weight:500;letter-spacing:-.022em;line-height:1.15;margin-bottom:12px;}
+@media(max-width:560px){.q-block h2{font-size:23px;}}
+.q-block .sub{color:var(--steel);font-size:14.5px;margin-bottom:26px;line-height:1.6;}
+.q-block .note{color:var(--steel);font-size:14px;line-height:1.6;}
+
+label.field{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+select{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--rs);padding:12px 14px;min-height:44px;font-family:var(--font-primary);font-size:15px;color:var(--ink);cursor:pointer;
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5' stroke='%2366706B' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;background-size:12px;padding-right:36px;}
+select:focus{outline:none;border-color:var(--green-medium);box-shadow:0 0 0 3px rgba(63,102,88,.10);}
+input[type=text],input[type=email],input[type=tel],textarea{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--rs);padding:12px 14px;min-height:44px;font-family:var(--font-primary);font-size:15px;color:var(--ink);transition:border-color .15s,box-shadow .15s;}
+input::placeholder,textarea::placeholder{color:#A4ABA6;}
+input:focus,textarea:focus{outline:none;border-color:var(--green-medium);box-shadow:0 0 0 3px rgba(63,102,88,.10);}
+textarea{min-height:84px;resize:vertical;line-height:1.55;}
+input.err,textarea.err{border-color:var(--error);background:#FFF9F8;}
+input.err:focus,textarea.err:focus{border-color:var(--error);box-shadow:0 0 0 3px rgba(168,72,58,.10);}
+.ferr{display:none;font-size:12.5px;color:var(--error);margin-top:7px;line-height:1.45;}
+.ferr.on{display:flex;align-items:flex-start;gap:6px;}
+.ferr svg{flex-shrink:0;margin-top:2px;}
+.field-group{margin-bottom:16px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:640px){.two-col{grid-template-columns:1fr;}}
+.divider{border-top:1px solid var(--line);margin:26px 0 20px;}
+.sec-label{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--green);margin-bottom:14px;}
+
+.form-alert{display:none;background:#FFF4F1;border-left:3px solid var(--error);border-radius:0 var(--rs) var(--rs) 0;padding:14px 16px;font-size:13.5px;color:#7A3626;margin-bottom:20px;line-height:1.55;}
+.form-alert.on{display:block;}
+.privacy-note{display:flex;gap:11px;align-items:flex-start;background:var(--tint);border-left:3px solid var(--green-medium);border-radius:0 var(--rs) var(--rs) 0;padding:15px 17px;font-size:13.5px;color:var(--steel);margin-bottom:20px;line-height:1.6;}
+.privacy-note svg{flex-shrink:0;margin-top:3px;}
+
+details.more{border:1px solid var(--line);border-radius:var(--rs);background:var(--neutral);margin-top:10px;}
+details.more summary{cursor:pointer;list-style:none;padding:14px 16px;font-size:13.5px;font-weight:600;color:var(--green);display:flex;align-items:center;gap:9px;min-height:46px;}
+details.more summary::-webkit-details-marker{display:none;}
+details.more summary .chev{transition:transform .18s;display:inline-flex;}
+details.more[open] summary .chev{transform:rotate(90deg);}
+details.more summary .opt{color:var(--muted);font-weight:400;}
+details.more .inner{padding:4px 16px 18px;}
+
+/* ---------- BOUTONS ---------- */
+.btn{font-family:var(--font-primary);font-size:14px;font-weight:600;letter-spacing:0;text-transform:none;min-height:46px;padding:0 18px;border-radius:var(--rs);border:1px solid var(--green);cursor:pointer;background:var(--green);color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:9px;transition:background .15s,border-color .15s,color .15s;}
+.btn:hover{background:var(--green-hover);border-color:var(--green-hover);}
+.btn:disabled{opacity:.45;cursor:not-allowed;}
+.btn.secondary{background:var(--surface);border-color:var(--line);color:var(--ink);}
+.btn.secondary:hover{background:var(--tint);border-color:var(--green-medium);color:var(--green);}
+.btn-row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;align-items:center;}
+@media(max-width:560px){.btn-row .btn{width:100%;}}
+
+/* ---------- CHOIX DE SITUATION ---------- */
+.choice-stack{display:flex;flex-direction:column;gap:10px;}
+.choice-stack.err-box{outline:1px solid var(--error);outline-offset:6px;border-radius:3px;}
+.choice-card{position:relative;display:block;width:100%;text-align:left;cursor:pointer;appearance:none;-webkit-appearance:none;touch-action:manipulation;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:var(--rs);padding:15px 46px 15px 16px;font-family:var(--font-primary);transition:background .15s,border-color .15s;}
+@media(hover:hover) and (pointer:fine){.choice-card:hover{background:#F7F9F7;border-color:var(--line-hover);}}
+.choice-card.sel{background:var(--green-soft);border-color:var(--green-medium);}
+.choice-card::after{content:'';position:absolute;right:16px;top:50%;transform:translateY(-50%);width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);transition:all .15s;}
+.choice-card.sel::after{background:var(--green);border-color:var(--green);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.4L6.4 11.3L12.5 5' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size:14px;background-position:center;background-repeat:no-repeat;}
+.choice-card .ct{display:block;font-size:14.5px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.choice-card .cd{display:block;font-size:13px;color:var(--steel);line-height:1.5;}
+
+/* ---------- CONDITIONS ---------- */
+.value-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:26px;margin-bottom:14px;}
+.value-card .vh{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.value-card h4{font-size:21px;font-weight:600;letter-spacing:-.018em;color:var(--green);margin-bottom:20px;}
+.benefits{list-style:none;}
+.benefits li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.55;padding:11px 0;border-top:1px solid var(--line);}
+.benefits li:first-child{border-top:none;padding-top:0;}
+.benefits .ck{flex-shrink:0;margin-top:3px;color:var(--green-medium);}
+.rate{display:inline-flex;align-items:baseline;gap:7px;font-size:36px;font-weight:600;letter-spacing:-.03em;color:var(--green);}
+.rate small{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;font-weight:400;color:var(--muted);}
+.rate-row{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--line);}
+.rate-item .rl{font-size:13px;color:var(--steel);margin-top:6px;}
+.cond-flag{background:var(--neutral);border-radius:var(--rs);padding:14px 16px;font-size:13.5px;margin-top:18px;display:flex;gap:10px;align-items:flex-start;color:var(--steel);line-height:1.55;}
+.cond-flag strong{font-weight:600;color:var(--ink);}
+
+.doc-row{background:var(--neutral);border-radius:var(--r);padding:18px;margin-top:24px;}
+.doc-row .dt{font-size:15px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:9px;}
+.doc-row .dd{font-size:13.5px;color:var(--steel);margin-bottom:15px;line-height:1.55;}
+.link-btn{background:none;border:none;color:var(--green);font-family:var(--font-primary);font-size:13.5px;font-weight:600;cursor:pointer;text-decoration:underline;padding:0;}
+.disclaimer{background:var(--neutral);border-radius:var(--rs);padding:14px 16px;font-size:12.5px;color:var(--muted);margin-top:16px;line-height:1.6;}
+
+/* ---------- FICHE ---------- */
+.ref-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 22px;background:var(--neutral);border-radius:var(--rs);padding:14px 16px;margin:20px 0;}
+.ref-line .rk{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);}
+.ref-line .rvv{font-family:var(--mono);font-size:13px;color:var(--ink);margin-right:6px;overflow-wrap:anywhere;}
+.receipt{border:1px solid var(--line);border-radius:var(--r);margin:20px 0;background:var(--surface);overflow:hidden;}
+.receipt .rhead{background:var(--green);color:#fff;padding:13px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
+.receipt .rhead .rl{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.75;}
+.receipt .rhead .rv{font-family:var(--mono);font-size:14px;letter-spacing:.05em;font-weight:500;}
+.rgrid{display:grid;grid-template-columns:1fr 1fr;}
+@media(max-width:560px){.rgrid{grid-template-columns:1fr;}}
+.rcell{border-top:1px solid var(--line);border-right:1px solid var(--line);padding:13px 18px;}
+.rcell:nth-child(2n){border-right:none;}
+@media(max-width:560px){.rcell{border-right:none;}}
+.rcell .k{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.rcell .v{font-size:14px;color:var(--ink);line-height:1.45;overflow-wrap:anywhere;}
+.rcell .v.mono{font-family:var(--mono);font-size:13px;}
+
+/* ---------- RENDEZ-VOUS ---------- */
+.meet-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:26px;}
+@media(max-width:560px){.meet-grid{grid-template-columns:1fr;}}
+.meet-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:17px 18px;display:flex;gap:13px;align-items:flex-start;min-width:0;}
+.meet-card .mi{flex-shrink:0;margin-top:2px;color:var(--green-medium);}
+.meet-card .mk{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
+.meet-card .mv{font-size:15px;font-weight:600;letter-spacing:-.01em;overflow-wrap:anywhere;}
+.meet-card .ms{font-size:13px;color:var(--steel);margin-top:3px;}
+
+#calendly-embed{min-width:0;height:660px;margin:6px 0 4px;}
+@media(max-width:640px){#calendly-embed{height:740px;}}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 6px;}
+@media(max-width:640px){.slots{grid-template-columns:1fr 1fr;}}
+@media(max-width:400px){.slots{grid-template-columns:1fr;}}
+.slot{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:13px 10px;text-align:center;cursor:pointer;min-height:64px;display:flex;flex-direction:column;justify-content:center;transition:background .15s,border-color .15s,color .15s;
+  width:100%;font-family:inherit;color:inherit;appearance:none;-webkit-appearance:none;touch-action:manipulation;}
+.slot:active{background:var(--tint);}
+@media(hover:hover) and (pointer:fine){.slot:hover{background:var(--tint);border-color:var(--line-hover);}}
+.slot.sel{background:var(--green);border-color:var(--green);color:#fff;}
+.slot .d{display:block;font-size:12px;color:var(--muted);margin-bottom:4px;}
+.slot .h{display:block;font-family:var(--mono);font-size:16px;font-weight:500;letter-spacing:.02em;}
+.slot.sel .d{color:rgba(255,255,255,.72);}
+
+.info-block{display:none;border-radius:0 var(--rs) var(--rs) 0;padding:14px 16px;font-size:13.5px;line-height:1.55;margin-bottom:18px;}
+.info-block.on{display:block;}
+.info-block.warn{background:#FBF5EC;border-left:3px solid var(--warning);color:#7A5320;}
+.info-block.error{background:#FFF4F1;border-left:3px solid var(--error);color:#7A3626;}
+.info-block strong{font-weight:600;}
+.slots-loading{grid-column:1/-1;padding:22px 0;font-size:13.5px;color:var(--muted);text-align:center;}
+.meet-block{background:var(--tint);border-left:3px solid var(--green-medium);border-radius:0 var(--rs) var(--rs) 0;padding:15px 17px;margin:18px 0 4px;}
+.meet-block .mbk{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.meet-block .mbl{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:600;color:var(--green);text-decoration:none;overflow-wrap:anywhere;}
+.meet-block .mbl:hover{text-decoration:underline;}
+.confirm-icon{width:46px;height:46px;margin-bottom:20px;}
+.timeline{margin-top:22px;}
+.timeline-row{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid var(--line);font-size:14.5px;align-items:flex-start;color:var(--ink);}
+.timeline-row:last-child{border-bottom:none;}
+.timeline-row .tick{width:18px;flex-shrink:0;margin-top:1px;}
+.timeline-row.pending{color:var(--muted);}
+
+/* ---------- MODAL ---------- */
+.modal-bg{position:fixed;inset:0;background:rgba(32,37,34,.5);display:none;align-items:center;justify-content:center;z-index:80;padding:20px;}
+.modal-bg.open{display:flex;}
+.modal{background:var(--surface);border-radius:10px;max-width:680px;width:100%;max-height:86vh;display:flex;flex-direction:column;box-shadow:0 20px 50px rgba(23,26,24,.18);}
+.modal-head{padding:22px 26px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:14px;}
+.modal-head h3{font-size:17px;font-weight:600;line-height:1.35;}
+.modal-head .mh-sub{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted);margin-top:8px;text-transform:uppercase;}
+.modal-close{background:none;border:none;font-size:24px;cursor:pointer;color:var(--muted);line-height:1;flex-shrink:0;width:32px;height:32px;border-radius:var(--rs);}
+.modal-close:hover{background:var(--neutral);color:var(--ink);}
+.modal-body{padding:26px;overflow-y:auto;font-size:14.5px;line-height:1.7;color:var(--steel);}
+.modal-body h5{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin:22px 0 8px;}
+.modal-body h5:first-child{margin-top:0;}
+.modal-body p{margin-bottom:11px;}
+.modal-foot{padding:16px 26px;border-top:1px solid var(--line);display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;align-items:center;}
+.draft-tag{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#8A5A24;background:#FBF5EC;border-radius:5px;padding:5px 9px;}
+
+/* ---------- PIED ---------- */
+.site-foot{margin-top:44px;border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;}
+.sf-left{font-size:13px;color:var(--muted);line-height:1.7;}
+.sf-left strong{color:var(--ink);font-weight:600;}
+.sf-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--green);text-decoration:none;}
+.sf-link:hover{text-decoration:underline;}
+
+/* ---------- ASSISTANT ---------- */
+.chat-toggle{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom));right:24px;background:var(--green);color:#fff;border:1px solid var(--green);border-radius:var(--rs);padding:0 18px;min-height:48px;font-family:var(--font-primary);font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:10px;z-index:50;box-shadow:0 4px 14px rgba(25,40,33,.14);}
+.chat-toggle:hover{background:var(--green-hover);}
+.chat-toggle.dot::after{content:'';position:absolute;top:-4px;right:-4px;width:9px;height:9px;border-radius:50%;background:var(--sand);border:2px solid var(--bg);}
+.chat-panel{position:fixed;bottom:82px;right:24px;width:352px;max-width:calc(100vw - 32px);background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 16px 40px rgba(23,26,24,.12);display:none;flex-direction:column;max-height:min(64vh,460px);z-index:50;overflow:hidden;}
+.chat-panel.open{display:flex;}
+.chat-head{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;cursor:pointer;background:var(--neutral);}
+.chat-head .ch-txt{flex:1;min-width:0;}
+.chat-head .t{font-size:14px;font-weight:600;color:var(--green);}
+.chat-head .s{font-size:12.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.chat-head .ch-actions{display:flex;gap:4px;flex-shrink:0;}
+.ch-btn{background:none;border:1px solid transparent;border-radius:6px;width:34px;height:34px;font-size:16px;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:var(--font-primary);line-height:1;}
+.ch-btn:hover{border-color:var(--line);color:var(--ink);background:var(--surface);}
+.chat-panel.collapsed .chat-body,.chat-panel.collapsed .chat-input-row,.chat-panel.collapsed .chat-disclaimer,.chat-panel.collapsed .mic-hint{display:none;}
+.chat-panel.collapsed .chat-head{border-bottom:none;}
+.chat-panel.collapsed .chat-head .s{display:none;}
+.chat-body{padding:16px;overflow-y:auto;flex:1;min-height:160px;display:flex;flex-direction:column;gap:10px;}
+.chat-msg{font-size:13.5px;padding:11px 13px;border-radius:var(--rs);max-width:90%;line-height:1.55;color:var(--ink);}
+.chat-msg.bot{background:#F5F6F4;align-self:flex-start;}
+.chat-msg.user{background:var(--green-soft);align-self:flex-end;}
+.chat-cta{align-self:flex-start;background:var(--green);color:#fff;border:none;border-radius:var(--rs);padding:0 14px;min-height:44px;font-family:var(--font-primary);font-size:13px;font-weight:600;cursor:pointer;}
+.chat-cta:hover{background:var(--green-hover);}
+.chat-input-row{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--line);}
+.chat-input-row input{flex:1;min-width:0;padding:10px 12px;font-size:14px;min-height:44px;border-radius:var(--rs);}
+.chat-mic{background:var(--surface);border:1px solid var(--line);border-radius:var(--rs);padding:0 13px;cursor:pointer;color:var(--muted);display:flex;align-items:center;min-height:44px;min-width:46px;justify-content:center;}
+.chat-mic:hover{border-color:var(--green-medium);color:var(--green);}
+.chat-mic.rec{border-color:var(--green-medium);color:var(--green);background:var(--green-soft);}
+.chat-send{background:var(--green);color:#fff;border:none;border-radius:var(--rs);padding:0 15px;min-height:44px;font-family:var(--font-primary);font-size:13.5px;font-weight:600;cursor:pointer;}
+.chat-send:hover{background:var(--green-hover);}
+.mic-hint{display:none;padding:10px 16px 0;font-size:12.5px;color:var(--green);line-height:1.45;}
+.mic-hint.on{display:block;}
+.chat-disclaimer{font-size:11.5px;color:var(--muted);padding:10px 16px;border-top:1px solid var(--line);line-height:1.5;}
+@media(max-width:640px){
+}
+
+/* =====================================================================
+   MOBILE — testé à 430, 390 et 375 px
+   ===================================================================== */
+@media(max-width:640px){
+  /* 16px minimum : en dessous, iOS zoome automatiquement au focus du champ */
+  input,textarea,select,.chat-input-row input{font-size:16px;}
+  select{background-position:right 12px center;}
+}
+
+@media(max-width:560px){
+  .wrap{padding:16px 16px 92px;}
+  header.site{padding-bottom:16px;gap:10px;}
+  .head-right{gap:12px;}
+
+  .hero{padding:26px 0 30px;gap:26px;}
+  .hero-label{margin-bottom:18px;line-height:1.8;}
+  .hero .promise{font-size:15px;padding:13px 14px;}
+  .hero p{font-size:14.5px;}
+  .hero-cta{width:100%;}
+  .hero-cta .btn{width:100%;}
+
+  .sec{padding:32px 0;}
+  .sec-title{margin-bottom:20px;}
+
+  .card{padding:18px 16px;}
+  .card h3{font-size:16px;}
+  .card p{font-size:13.5px;}
+  .card .cta{font-size:13.5px;}
+  .card .ico svg{width:42px;height:42px;}
+
+  .about-grid{gap:22px;}
+  .about h3{font-size:23px;}
+  .about-link{gap:12px;}
+  .about-link .btn{width:100%;}
+
+  .flow-header{margin:18px 0 18px;}
+  .q-block{padding:20px 16px;}
+  .q-block h2{font-size:22px;}
+  .q-block .sub{font-size:14px;margin-bottom:20px;}
+
+  .value-card{padding:20px 16px;}
+  .value-card h4{font-size:19px;}
+  .rate{font-size:32px;}
+  .doc-row{padding:16px;}
+
+  .modal-bg{padding:0;align-items:flex-end;}
+  .modal{max-height:92vh;border-radius:12px 12px 0 0;}
+  .modal-head{padding:18px 18px;}
+  .modal-body{padding:18px;}
+  .modal-foot{padding:14px 18px;flex-direction:column-reverse;align-items:stretch;}
+  .modal-foot .btn{width:100%;}
+  .modal-foot .draft-tag{text-align:center;margin-top:4px;}
+
+  .site-foot{margin-top:32px;}
+}
+
+@media(max-width:430px){
+  /* Une seule colonne partout : à cette largeur, deux colonnes deviennent illisibles */
+  .about-keys{grid-template-columns:1fr;}
+  .slots{grid-template-columns:1fr 1fr;}
+  h1{font-size:31px;}
+}
+
+@media(max-width:380px){
+  .wrap{padding:14px 13px 92px;}
+  h1{font-size:28px;}
+  .slots{grid-template-columns:1fr;}
+  .brand .lock .w{font-size:12px;letter-spacing:.22em;text-indent:.22em;}
+  .head-link span{display:none;}
+  .q-block{padding:18px 14px;}
+  .q-block h2{font-size:20px;}
+}
+
+/* L'assistant devient une feuille ancrée en bas, plus confortable au pouce */
+@media(max-width:640px){
+  .chat-panel{left:0;right:0;bottom:0;width:100%;max-width:100%;
+    border-radius:14px 14px 0 0;border-left:none;border-right:none;border-bottom:none;
+    padding-bottom:env(safe-area-inset-bottom);
+    max-height:calc(100vh - 80px);
+    max-height:calc(100dvh - 80px);
+    box-shadow:0 -8px 30px rgba(23,26,24,.16);}
+  .chat-head{padding:16px;}
+  .chat-body{padding:16px;min-height:180px;}
+  .chat-msg{max-width:92%;font-size:14px;}
+  .chat-toggle{bottom:calc(16px + env(safe-area-inset-bottom));right:16px;left:auto;min-height:50px;}
+  body.chat-ouvert .chat-toggle{display:none;}
+}
+
+/* Barre d'étapes : pastilles seules, sans défilement horizontal */
+@media(max-width:700px){
+  .steps-bar{overflow-x:visible;}
+  .sb-sep{margin:0 5px;min-width:10px;}
+}
+
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="site">
+    <!-- LOGO : remplacer src par le SVG/PNG définitif ; le lock-up texte sert de repli -->
+    <!-- LOGO DÉFINITIF
+         Renseigner les deux src ci-dessous quand les fichiers seront fournis :
+           #brandLogo        → logo horizontal (desktop)
+           #brandLogoCompact → version compacte (mobile)
+         Tant que les src sont vides, le lock-up texte ci-dessous sert de repli. -->
+    <div class="brand" id="brand" onclick="goHome()">
+      <img id="brandLogo" class="logo-desktop" src="" alt="SOURCE by RealT">
+      <img id="brandLogoCompact" class="logo-mobile" src="" alt="SOURCE">
+      <div class="fallback">
+        <svg class="sig" viewBox="0 0 240 400" fill="none" aria-hidden="true">
+          <path class="sig-a" d="M198 16 C122 42 44 100 35 162 C28 212 68 244 132 258 C88 230 74 200 84 170 C99 122 145 58 198 16 Z"/>
+          <path class="sig-b" d="M108 146 C174 168 206 208 200 254 C193 306 138 350 40 382 C128 342 170 300 174 256 C179 210 150 176 108 146 Z"/>
+        </svg>
+        <span class="sig-rule"></span>
+        <div class="lock">
+          <div class="w">SOURCE</div>
+          <div class="b"><i>by</i> RealT</div>
+        </div>
+      </div>
+    </div>
+    <div class="head-right">
+      <span class="head-tag">Une plateforme RealT&nbsp;SA</span>
+      <a class="head-link" href="https://realt.swiss" target="_blank" rel="noopener">realt.swiss <span>↗</span></a>
+      <span class="step-index" id="stepIndex">accueil</span>
+    </div>
+  </header>
+
+  <!-- ================= ACCUEIL ================= -->
+  <div class="screen active" id="screen-home">
+    <section class="hero">
+      <div class="hero-left">
+        <div class="hero-label">
+          <b>SOURCE</b> / REALT SA<br>
+          SOURCING FONCIER · SUISSE ROMANDE
+        </div>
+        <h1>Vous connaissez<br>une opportunité<br>immobilière&nbsp;?<br><span class="light">Parlons-en.</span></h1>
+        <div class="hero-rule"></div>
+        <p class="promise">Vous gardez le contrôle de votre information jusqu'à ce que nous ayons défini ensemble les conditions de collaboration.</p>
+        <p>Agents immobiliers, architectes, particuliers ou propriétaires : sélectionnez votre profil pour présenter votre opportunité directement à RealT, promoteur-acquéreur.</p>
+        <ul class="hero-bul">
+          <li>Un accès direct au promoteur-acquéreur</li>
+          <li>Conditions de collaboration définies en amont</li>
+          <li>Informations sensibles communiquées progressivement</li>
+        </ul>
+        <div class="hero-cta">
+          <button type="button" class="btn btn-lg" onclick="goProfil()">Présenter une opportunité <span aria-hidden="true">→</span></button>
+          <button type="button" class="btn secondary" onclick="scrollToHow()">Comment ça fonctionne</button>
+        </div>
+        <p class="hero-hint">Quatre questions, moins d'une minute.</p>
+      </div>
+
+    </section>
+
+
+    <section class="sec about">
+      <div class="sec-title">
+        <span class="sec-num">01</span>
+        <span class="sec-name">Qui nous sommes</span>
+        <span class="sec-line"></span>
+      </div>
+
+      <div class="about-grid">
+        <div>
+          <h3>RealT SA</h3>
+          <p>Fondée par <strong>Cédric Loubet</strong> et <strong>Pierre Tranchant</strong>, RealT SA est une entreprise active dans la promotion immobilière et la construction, qui combine plus de 25 ans d'expérience dans l'immobilier en Suisse romande.</p>
+          <p>Nous sommes actifs sur l'ensemble du processus, de l'analyse du projet jusqu'à la remise des clés aux acquéreurs finaux. Nous intervenons également en tant qu'entreprise générale et totale, reconnue par les banques suisses.</p>
+          <div class="about-link">
+            <a class="btn secondary" href="https://realt.swiss" target="_blank" rel="noopener">Voir nos projets <span>↗</span></a>
+            <span class="about-people">Un accès direct au promoteur-acquéreur.</span>
+          </div>
+        </div>
+
+        <div class="about-keys">
+          <div class="about-key">
+            <div class="k">Société</div>
+            <div class="v">RealT SA<small>Promotion immobilière</small></div>
+          </div>
+          <div class="about-key">
+            <div class="k">Expérience</div>
+            <div class="v">+25 ans<small>cumulés par les fondateurs</small></div>
+          </div>
+          <div class="about-key">
+            <div class="k">Territoire</div>
+            <div class="v">Suisse romande<small>Morges</small></div>
+          </div>
+          <div class="about-key">
+            <div class="k">Activités</div>
+            <div class="v" style="font-size:13px;line-height:1.55;">Promotion<br>Entreprise générale<br>Entreprise totale</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="sec-how" style="border-bottom:none;">
+      <div class="sec-title">
+        <span class="sec-num">02</span>
+        <span class="sec-name">Comment ça se passe</span>
+        <span class="sec-line"></span>
+      </div>
+      <div class="railA">
+        <div class="stepA">
+          <div class="hdr"><span class="num">01</span></div>
+          <div class="t">Opportunité</div>
+          <div class="d">Vous la présentez en moins d'une minute.</div>
+        </div>
+        <div class="stepA">
+          <div class="hdr"><span class="arw">→</span><span class="num">02</span></div>
+          <div class="t">Prise d'informations</div>
+          <div class="d">Nous prenons connaissance de votre opportunité.</div>
+        </div>
+        <div class="stepA">
+          <div class="hdr"><span class="arw">→</span><span class="num">03</span></div>
+          <div class="t">Conditions</div>
+          <div class="d">Vous découvrez notre cadre de collaboration.</div>
+        </div>
+        <div class="stepA">
+          <div class="hdr"><span class="arw">→</span><span class="num">04</span></div>
+          <div class="t">Échange</div>
+          <div class="d">Nous échangeons directement sur l'opportunité.</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-foot">
+      <div class="sf-left">
+        <strong>SOURCE by RealT</strong> — sourcing foncier<br>
+        RealT SA · Morges · Pierre Tranchant &amp; Cédric Loubet
+      </div>
+      <a class="sf-link" href="https://realt.swiss" target="_blank" rel="noopener">realt.swiss
+        <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M4 10L10 4M10 4H5.2M10 4V8.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </footer>
+  </div>
+
+
+  <!-- ================= CHOIX DU PROFIL ================= -->
+  <div class="screen" id="screen-profil">
+    <div class="flow-header">
+      <button type="button" class="back-btn" onclick="goHome()">← accueil</button>
+    </div>
+
+    <div class="pick">
+      <div class="pick-label">Pour commencer</div>
+      <h2 class="pick-h">Qui êtes-vous&nbsp;?</h2>
+      <p class="pick-sub">Sélectionnez votre profil : le cadre de collaboration et les questions posées s'y adaptent.</p>
+      <div class="grid pick-grid">
+            <button type="button" class="card profile-card" data-profile="agent">
+          <div class="cnum">01</div>
+          <h3>Agent<br>immobilier</h3>
+          <div class="ico">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <rect x="5" y="9" width="14" height="30" rx="3" class="ic" stroke-width="1.6"/>
+              <rect x="29" y="9" width="14" height="30" rx="3" class="ic" stroke-width="1.6"/>
+              <path d="M19 24H29" class="ic" stroke-width="1.6" stroke-linecap="round"/>
+              <circle cx="24" cy="24" r="3.6" class="ic-dot"/>
+            </svg>
+          </div>
+          <p>Mandat de vente en cours ou simple information : sécurisez votre apport et la commercialisation des lots futurs.</p>
+          <div class="cta"><span>Présenter une opportunité</span><span class="arw">→</span></div>
+            </button>
+            <button type="button" class="card profile-card" data-profile="architecte">
+          <div class="cnum">02</div>
+          <h3>Architecte</h3>
+          <div class="ico">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <rect x="5" y="9" width="14" height="30" rx="3" class="ic" stroke-width="1.6"/>
+              <path d="M5 19H19M5 29H19M12 9V39" class="ic" stroke-width="1" opacity=".45"/>
+              <rect x="29" y="9" width="14" height="30" rx="3" class="ic" stroke-width="1.6"/>
+              <path d="M19 24H29" class="ic" stroke-width="1.6" stroke-linecap="round"/>
+              <circle cx="24" cy="24" r="3.6" class="ic-dot"/>
+            </svg>
+          </div>
+          <p>Vous connaissez un projet ou une opportunité foncière ? Présentez-la directement à RealT.</p>
+          <div class="cta"><span>Présenter une opportunité</span><span class="arw">→</span></div>
+            </button>
+            <button type="button" class="card profile-card" data-profile="particulier">
+          <div class="cnum">03</div>
+          <h3>Particulier</h3>
+          <div class="ico">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <circle cx="12" cy="17" r="5.4" class="ic" stroke-width="1.6"/>
+              <path d="M4 39C4 31 7.5 27.5 12 27.5C16.5 27.5 20 31 20 39" class="ic" stroke-width="1.6" stroke-linecap="round"/>
+              <rect x="29" y="9" width="14" height="30" rx="3" class="ic" stroke-width="1.6"/>
+              <path d="M20 24H29" class="ic" stroke-width="1.6" stroke-linecap="round"/>
+              <circle cx="24" cy="24" r="3.6" class="ic-dot"/>
+            </svg>
+          </div>
+          <p>Une information ou une mise en relation, rémunérée si l'acquisition se réalise.</p>
+          <div class="cta"><span>Présenter une opportunité</span><span class="arw">→</span></div>
+            </button>
+            <button type="button" class="card profile-card" data-profile="proprietaire">
+          <div class="cnum">04</div>
+          <h3>Propriétaire<br>foncier</h3>
+          <div class="ico">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <rect x="14" y="9" width="20" height="30" rx="3" class="ic" stroke-width="1.6"/>
+              <circle cx="24" cy="24" r="3.6" class="ic-dot"/>
+              <path d="M14 15V12M14 36V33M34 15V12M34 36V33" class="ic" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p>Vendez en direct au promoteur, sans commission d'agence.</p>
+          <div class="cta"><span>Faire étudier mon bien</span><span class="arw">→</span></div>
+            </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 1. OPPORTUNITÉ ================= -->
+  <div class="screen" id="screen-brief">
+    <div class="flow-header">
+      <button type="button" class="back-btn" onclick="goProfil()">← changer de profil</button>
+      <div class="flow-title" id="brief-title"></div>
+    </div>
+    <div class="steps-bar" id="bar-brief"></div>
+
+    <div class="privacy-note">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L13.5 4V8C13.5 11 11 13.7 8 14.5C5 13.7 2.5 11 2.5 8V4L8 1.5Z" stroke="#6B6F66" stroke-width="1.2" stroke-linejoin="round"/></svg>
+      <div id="brief-privacy"></div>
+    </div>
+
+    <div class="q-block">
+      <div class="label">Étape 01 / 04 — Opportunité</div>
+      <div class="form-alert" id="form-alert"></div>
+      <h2 id="brief-h"></h2>
+      <p class="sub" id="brief-sub"></p>
+
+      <input type="checkbox" name="botcheck" id="botcheck" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;" aria-hidden="true">
+      <div class="sec-label">Vos coordonnées</div>
+      <div class="two-col">
+        <div class="field-group"><label class="field">Prénom</label><input type="text" id="f-prenom" placeholder="Marie" autocomplete="given-name" oninput="clearErr(this)"><div class="ferr" id="e-prenom"></div></div>
+        <div class="field-group"><label class="field">Nom</label><input type="text" id="f-nom" placeholder="Dupont" autocomplete="family-name" oninput="clearErr(this)"><div class="ferr" id="e-nom"></div></div>
+      </div>
+      <div class="field-group" id="g-societe">
+        <label class="field" id="l-societe">Société</label>
+        <input type="text" id="f-societe" autocomplete="organization" placeholder="">
+      </div>
+      <div class="two-col">
+        <div class="field-group"><label class="field">E-mail</label><input type="email" spellcheck="false" autocapitalize="off" autocorrect="off" id="f-email" placeholder="marie.dupont@exemple.ch" autocomplete="email" inputmode="email" oninput="clearErr(this)"><div class="ferr" id="e-email"></div></div>
+        <div class="field-group"><label class="field">Téléphone</label><input type="tel" id="f-tel" placeholder="079 000 00 00" autocomplete="tel" inputmode="tel" oninput="clearErr(this)"><div class="ferr" id="e-tel"></div></div>
+      </div>
+
+      <div class="divider" id="divider-situation"></div>
+      <div class="sec-label" id="sec-situation"></div>
+      <div class="choice-stack" id="situation-block"></div>
+      <div class="ferr" id="e-situation"></div>
+
+      <div class="divider"></div>
+      <div class="sec-label" id="sec-objet"></div>
+      <div class="field-group">
+        <label class="field" id="l-commune">Commune</label>
+        <input type="text" id="f-commune" placeholder="Ex : Chêne-Bougeries" oninput="clearErr(this)">
+        <div class="ferr" id="e-commune"></div>
+      </div>
+      <div class="field-group">
+        <label class="field" id="l-type">Type de bien</label>
+        <input type="text" id="f-type" placeholder="Ex : terrain nu, villa à démolir, immeuble">
+      </div>
+
+      <details class="more">
+        <summary>
+          <span class="chev"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Ajouter des précisions <span class="opt">— facultatif</span>
+        </summary>
+        <div class="inner">
+          <div class="two-col">
+            <div class="field-group">
+              <label class="field">Surface ou ordre de grandeur</label>
+              <input type="text" id="f-taille" placeholder="Ex : environ 1 500 m²">
+            </div>
+            <div class="field-group">
+              <label class="field">Zone d'affectation</label>
+              <input type="text" id="f-zone" placeholder="Ex : zone résidentielle, zone 5, en cours de déclassement">
+            </div>
+          </div>
+          <div class="field-group" id="g-avancement" style="display:none;">
+            <label class="field">État d'avancement du projet</label>
+            <select id="f-avancement">
+              <option value="">—</option>
+              <option>Opportunité identifiée</option>
+              <option>Premières réflexions / esquisses</option>
+              <option>Étude en cours</option>
+              <option>Projet déjà développé</option>
+              <option>Autorisation / permis en cours</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="field-group" id="g-relation">
+            <label class="field">Votre relation avec le propriétaire</label>
+            <input type="text" id="f-relation" placeholder="Ex : voisin, ancien client, contact indirect">
+          </div>
+          <div class="field-group">
+            <label class="field">Référence parcellaire</label>
+            <input type="text" id="f-parcelle" placeholder="Ex : parcelle 1284">
+          </div>
+          <div class="field-group">
+            <label class="field">Calendrier du propriétaire</label>
+            <input type="text" id="f-calendrier" placeholder="Ex : souhaite vendre avant la fin de l'année">
+          </div>
+          <div class="field-group" style="margin-bottom:0;">
+            <label class="field">Commentaires et informations complémentaires</label>
+            <textarea id="f-notes" placeholder="Permis en cours, contraintes connues, contexte particulier..."></textarea>
+          </div>
+        </div>
+      </details>
+
+      <div class="btn-row" style="margin-top:20px;">
+        <button class="btn" id="brief-submit" onclick="submitBrief()">Envoyer <span>→</span></button>
+        <button class="btn secondary" onclick="goHome()">Annuler</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 2. VÉRIFICATION ================= -->
+  <div class="screen" id="screen-verif">
+    <div class="flow-header">
+      <button class="back-btn" onclick="backToBrief()">← retour</button>
+      <button class="back-btn" onclick="goHome()">accueil</button>
+      <div class="flow-title" id="verif-title"></div>
+    </div>
+    <div class="steps-bar" id="bar-verif"></div>
+
+    <div class="q-block">
+      <svg class="confirm-icon" viewBox="0 0 46 46" fill="none"><circle cx="23" cy="23" r="23" fill="#EEF6F1"/><circle cx="23" cy="23" r="15" fill="#2F7155"/><path d="M17 23.4L21.2 27.6L29.5 19" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="label">Étape 02 / 04 — Prise d'informations</div>
+      <h2 id="verif-h">Votre opportunité a bien été reçue</h2>
+      <p class="sub" id="verif-sub"></p>
+
+      <div class="info-block" id="verif-dev"></div>
+      <div id="verif-receipt"></div>
+
+      <p class="note">Découvrez maintenant nos conditions de collaboration pour votre profil.</p>
+      <div class="btn-row" style="margin-top:14px;">
+        <button class="btn" onclick="goConditions()">Voir les conditions <span>→</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 3. CONDITIONS ================= -->
+  <div class="screen" id="screen-conditions">
+    <div class="flow-header">
+      <button class="back-btn" onclick="backToVerif()">← retour</button>
+      <button class="back-btn" onclick="goHome()">accueil</button>
+      <div class="flow-title" id="cond-title"></div>
+    </div>
+    <div class="steps-bar" id="bar-cond"></div>
+
+    <div class="q-block">
+      <div class="label">Étape 03 / 04 — Conditions</div>
+      <h2 id="cond-h"></h2>
+      <p class="sub" id="cond-sub"></p>
+
+      <div id="cond-body"></div>
+
+      <div class="doc-row">
+        <div class="dt"><svg width="17" height="17" viewBox="0 0 18 18" fill="none" style="color:var(--green-medium);flex-shrink:0"><path d="M4 2h6l4 4v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M10 2v4h4" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg><span id="doc-title"></span></div>
+        <div class="dd" id="doc-desc"></div>
+        <div class="btn-row" style="margin-top:0;">
+          <button class="btn secondary" onclick="openDoc()">Voir le document <span>↗</span></button>
+          <button class="btn secondary" data-pdf onclick="downloadPdf()">Télécharger le PDF <span>↓</span></button>
+        </div>
+        <div class="disclaimer">Ce document est présenté à titre informatif. Il ne constitue aucun engagement. Le document définitif est établi après l'entretien, sur la base des conditions convenues entre les parties.</div>
+      </div>
+
+      <div class="divider"></div>
+      <p class="note" style="margin-bottom:14px;" id="cond-outro"></p>
+      <div class="btn-row">
+        <button class="btn" id="cond-cta" onclick="goSchedule()"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 4. ÉCHANGE ================= -->
+  <div class="screen" id="screen-schedule">
+    <div class="flow-header">
+      <button class="back-btn" onclick="backToConditions()">← retour</button>
+      <button class="back-btn" onclick="goHome()">accueil</button>
+      <div class="flow-title" id="sched-title"></div>
+    </div>
+    <div class="steps-bar" id="bar-sched"></div>
+
+    <div class="q-block">
+      <div class="label">Étape 04 / 04 — Échange</div>
+      <h2 id="sched-h">Échangeons sur votre opportunité</h2>
+      <p class="sub" id="sched-sub"></p>
+
+      <div class="info-block" id="slots-state"></div>
+      <div class="meet-grid">
+        <div class="meet-card">
+          <span class="mi"><svg width="19" height="19" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.4" stroke="currentColor" stroke-width="1.3"/><path d="M4 17c0-3.4 2.7-5.2 6-5.2s6 1.8 6 5.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span>
+          <div>
+            <div class="mk">Votre interlocuteur</div>
+            <div class="mv">Pierre Tranchant</div>
+            <div class="ms">RealT SA</div>
+          </div>
+        </div>
+        <div class="meet-card">
+          <span class="mi"><svg width="19" height="19" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="5.5" width="10" height="9" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M12.5 9.2L17.5 6.6v6.8l-5-2.6z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></span>
+          <div>
+            <div class="mk">Format</div>
+            <div class="mv">Google Meet</div>
+            <div class="ms">Lien envoyé par e-mail</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="calendly-embed"></div>
+      <div class="ferr" id="e-slot"></div>
+
+      <div class="btn-row" id="resa-manuelle">
+        <button class="btn" id="btn-reserver" onclick="confirmSchedule()">Réserver l'échange <span aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CONFIRMATION ================= -->
+  <div class="screen" id="screen-done">
+    <div class="flow-header">
+      <button class="back-btn" onclick="goHome()">← accueil</button>
+      <div class="flow-title">Rendez-vous confirmé</div>
+    </div>
+
+    <div class="q-block">
+      <svg class="confirm-icon" viewBox="0 0 46 46" fill="none"><circle cx="23" cy="23" r="23" fill="#EEF6F1"/><circle cx="23" cy="23" r="15" fill="#2F7155"/><path d="M17 23.4L21.2 27.6L29.5 19" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="label">C'est noté</div>
+      <h2 id="done-h"></h2>
+      <p class="sub" id="done-sub"></p>
+      <div class="meet-block" id="meet-block" style="display:none;">
+        <div class="mbk">Votre visioconférence</div>
+        <a class="mbl" id="meet-link" href="#" target="_blank" rel="noopener">
+          <svg width="17" height="17" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="5.5" width="10" height="9" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M12.5 9.2L17.5 6.6v6.8l-5-2.6z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+          <span></span>
+        </a>
+      </div>
+
+      <div class="timeline" id="done-timeline"></div>
+      <div class="receipt" id="done-receipt" style="margin-top:20px;"></div>
+      <div class="disclaimer">Si les parties souhaitent poursuivre, le document définitif est établi aux conditions convenues ensemble. Les informations sensibles et le dossier complet ne sont transmis qu'à ce moment-là.</div>
+
+      <div class="btn-row" style="margin-top:20px;">
+        <button class="btn secondary" onclick="goHome()">Retour à l'accueil</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DOCUMENT TYPE -->
+<div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeDoc()">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <h3 id="modal-title"></h3>
+        <div class="mh-sub" id="modal-sub"></div>
+      </div>
+      <button class="modal-close" onclick="closeDoc()">×</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-foot">
+      <span class="draft-tag">Document type — non contractuel</span>
+      <button class="btn secondary" data-pdf onclick="downloadPdf()">Télécharger le PDF <span>↓</span></button>
+      <button class="btn" onclick="closeDoc()">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ASSISTANT -->
+<button class="chat-toggle" id="chatToggle" onclick="toggleChat()">
+  Assistant Source <span style="font-size:14px;line-height:1;">+</span>
+</button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-head" onclick="toggleCollapse()">
+    <div class="ch-txt">
+      <div class="t">Assistant Source</div>
+      <div class="s">Une question sur votre opportunité ?</div>
+    </div>
+    <div class="ch-actions">
+      <button class="ch-btn" id="collapseBtn" onclick="event.stopPropagation();toggleCollapse()" title="Réduire">–</button>
+      <button class="ch-btn" onclick="event.stopPropagation();closeChat()" title="Fermer">×</button>
+    </div>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="chat-msg bot">Bonjour. Je réponds sur SOURCE, les critères de RealT, la rémunération, l'antériorité et le déroulé d'un dossier. Posez votre question librement.</div>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="Écrivez ou dictez votre question..." autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();sendChat();}">
+    <button type="button" class="chat-mic" id="chatMic" onclick="toggleMic()" title="Dicter la question">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><rect x="6" y="1.5" width="4" height="7.5" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 7.5C3.5 10 5.5 11.5 8 11.5C10.5 11.5 12.5 10 12.5 7.5M8 11.5V14M6 14H10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+    </button>
+    <button type="button" class="chat-send" onclick="sendChat()">Envoyer <span>→</span></button>
+  </div>
+  <div class="mic-hint" id="micHint"></div>
+  <div class="chat-disclaimer">Informations générales. SOURCE ne fournit pas de conseil juridique ou fiscal personnalisé. Aucune signature ne se fait en ligne.</div>
+</div>
+
+<script>
+/* =====================================================================
+   SOURCE by RealT — prototype
+   Modèle de données pensé pour un futur espace apporteur (point 12).
+   ===================================================================== */
+
+const STATUTS = ["Reçue","Vérification","Rendez-vous prévu","Analyse","En discussion","Acquisition en cours","Acquisition réalisée","Non retenue"];
+
+/* Objet opportunité — structure destinée à être persistée côté serveur */
+function nouvelleOpportunite(){
+  return {
+    reference:null, creeLe:null, statut:"Reçue",
+    profil:null, situation:null,
+    contact:{prenom:"",nom:"",societe:"",email:"",telephone:""},
+    bien:{commune:"",type:"",ordreDeGrandeur:"",zoneAffectation:"",avancement:"",relation:"",parcelle:"",calendrier:"",commentaires:""},
+    entretien:{creneau:null,dureeMinutes:20,note:"",lienVisio:null,evenementCalendrier:null}
+  };
+}
+let opp = nouvelleOpportunite();
+
+/* Référence unique — SRC-AAAA-NNNNNN (séquence gérée côté serveur en production) */
+let SEQ = 141;
+function genererReference(){
+  SEQ += 1;
+  return "SRC-" + new Date().getFullYear() + "-" + String(SEQ).padStart(6,"0");
+}
+
+/* =====================================================================
+   CONFIGURATION — les trois seules valeurs à renseigner pour la mise en ligne.
+   ===================================================================== */
+var CONFIG = {
+  /* 1. Web3Forms — clé publique par conception, à restreindre à votre domaine
+        dans le tableau de bord Web3Forms. Vide = mode démonstration. */
+  web3formsKey: "",
+
+  /* 2. Calendly — URL du type d'évènement, ex.
+        "https://calendly.com/pierre-realt/echange-source"
+        Activer Google Meet dans Calendly : le lien est généré automatiquement. */
+  calendlyUrl: "",
+
+  /* 3. Adresse de repli affichée si un envoi échoue. */
+  emailContact: "pierre@realt.swiss"
+};
+function formPret(){ return !!CONFIG.web3formsKey; }
+function calendlyPret(){ return !!CONFIG.calendlyUrl; }
+
+/* =====================================================================
+   ENVOI DU FORMULAIRE — Web3Forms
+   Aucun serveur à maintenir : la soumission part directement vers l'API,
+   qui envoie un e-mail et conserve la trace côté Web3Forms.
+   ===================================================================== */
+async function envoyerOpportunite(o){
+  if(!formPret()) return {ok:false, code:"non_configure"};
+
+  var P = PROFILES[o.profil];
+  var payload = {
+    access_key: CONFIG.web3formsKey,
+    subject: "SOURCE — " + P.name + " — " + (o.bien.commune||"commune non précisée"),
+    from_name: "SOURCE by RealT",
+    botcheck: "",                                  /* piège à robots */
+
+    "Référence":            o.reference,
+    "Reçue le":             o.creeLe,
+    "Profil":               P.name,
+    "Situation":            o.situation || "—",
+    name:                   o.contact.prenom + " " + o.contact.nom,
+    email:                  o.contact.email,       /* sert d'adresse de réponse */
+    "Téléphone":            o.contact.telephone,
+    "Société":              o.contact.societe || "—",
+    "Commune":              o.bien.commune,
+    "Type de bien":         o.bien.type || "—",
+    "Surface":              o.bien.ordreDeGrandeur || "—",
+    "Zone d'affectation":   o.bien.zoneAffectation || "—",
+    "État d'avancement":    o.bien.avancement || "—",
+    "Relation propriétaire":o.bien.relation || "—",
+    "Parcelle":             o.bien.parcelle || "—",
+    "Calendrier":           o.bien.calendrier || "—",
+    "Commentaires":         o.bien.commentaires || "—"
+  };
+
+  try{
+    var r = await fetch("https://api.web3forms.com/submit",{
+      method:"POST",
+      headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body: JSON.stringify(payload)
+    });
+    var data = await r.json().catch(function(){ return {}; });
+    if(data && data.success) return {ok:true};
+    return {ok:false, code:"refus", message:(data && data.message) || ""};
+  }catch(e){
+    return {ok:false, code:"reseau"};
+  }
+}
+
+var ERREURS_ENVOI = {
+  reseau:        "La connexion a été interrompue. Vérifiez votre réseau et réessayez.",
+  refus:         "L'envoi n'a pas abouti. Merci de réessayer dans un instant.",
+  non_configure: "L'envoi n'est pas encore actif."
+};
+
+/* ================= PROFILS ================= */
+const PROFILES = {
+  agent:{
+    name:"Agent immobilier",
+    societe:"Agence immobilière", societePh:"Ex : Régie Lac & Rive SA",
+    briefH:"Parlez-nous brièvement de l'opportunité",
+    briefSub:"Trois informations suffisent pour ouvrir la discussion. Cela prend moins d'une minute.",
+    privacy:"À ce stade, vous choisissez le niveau d'information que vous souhaitez nous communiquer. Vous pouvez nous transmettre assez d'éléments pour que nous comprenions l'opportunité sans révéler immédiatement ce que vous considérez comme sensible. L'adresse exacte, l'identité du propriétaire et les documents ne sont pas nécessaires pour prendre rendez-vous.",
+    situationLabel:"Votre situation",
+    situations:[
+      {id:"mandate", t:"J'ai un mandat de vente", d:"Vous commercialisez déjà le bien et souhaitez vous sécuriser auprès du promoteur-acquéreur pour la commercialisation des lots futurs."},
+      {id:"sans", t:"Je n'ai pas de mandat", d:"Vous connaissez une opportunité sans lien contractuel avec le propriétaire."}
+    ],
+    objetLabel:"L'opportunité",
+    condH:"Ce que vous gagnez avec SOURCE",
+    condCta:"Échanger sur cette opportunité",
+    condOutro:"Une condition ne vous convient pas, ou vous souhaitez proposer autre chose ? C'est exactement ce dont nous parlerons pendant l'entretien.",
+    schedSub:"Un échange de 20 minutes pour comprendre l'opportunité, vérifier l'intérêt de RealT et discuter des conditions de collaboration."
+  },
+  architecte:{
+    name:"Architecte",
+    societe:"Société / bureau d'architecture", societePh:"Ex : Atelier Vernier Sàrl",
+    briefH:"Parlez-nous du projet ou de l'opportunité",
+    briefSub:"Quelques éléments suffisent. Cela prend moins d'une minute.",
+    privacy:"À ce stade, vous choisissez le niveau d'information que vous souhaitez nous communiquer. Les plans, les études et l'identité du propriétaire ne sont pas nécessaires pour prendre rendez-vous.",
+    /* Pas de distinction contractuelle mandaté / non mandaté :
+       la collaboration se définit lors de l'échange. */
+    situations:null,
+    avancement:true,
+    objetLabel:"L'opportunité",
+    typeLabel:"Type de bien / projet",
+    condH:"Une collaboration adaptée au projet",
+    condSub:"Chaque projet est différent. Votre rôle, votre implication et les modalités de collaboration sont discutés directement avec RealT en fonction de l'opportunité.",
+    condCta:"Échanger sur le projet",
+    condOutro:"",
+    sansDocument:true,
+    schedSub:"Choisissez un créneau pour échanger directement avec Pierre Tranchant."
+  },
+  particulier:{
+    name:"Particulier",
+    societe:null,
+    briefH:"Parlez-nous brièvement de l'opportunité",
+    briefSub:"Trois informations suffisent pour ouvrir la discussion. Cela prend moins d'une minute.",
+    privacy:"À ce stade, vous choisissez le niveau d'information que vous souhaitez nous communiquer. L'adresse exacte, l'identité du propriétaire et les documents ne sont pas nécessaires pour prendre rendez-vous.",
+    situationLabel:"Quelle est la nature de votre apport ?",
+    situations:[
+      {id:"info", t:"Je sais qu'un bien se vend", d:"Vous nous transmettez l'information, sans lien avec le propriétaire."},
+      {id:"relation", t:"Je peux vous mettre en relation avec le propriétaire", d:"Vous connaissez le propriétaire et pouvez organiser le contact."},
+      {id:"proprio", t:"Je suis moi-même le propriétaire", d:"Vous vendez votre propre bien — nous vous orientons vers le bon parcours."}
+    ],
+    objetLabel:"L'opportunité",
+    condH:"Ce que vous gagnez avec SOURCE",
+    condCta:"Échanger sur cette opportunité",
+    condOutro:"Une question sur la façon dont la rémunération est traitée ? Nous en parlerons lors de l'entretien.",
+    schedSub:"Un échange de 20 minutes pour comprendre l'opportunité, vérifier l'intérêt de RealT et discuter des conditions de collaboration."
+  },
+  proprietaire:{
+    name:"Propriétaire foncier",
+    societe:null,
+    briefH:"Parlez-nous de votre bien",
+    briefSub:"Vous envisagez de vendre un terrain, une villa ou un immeuble ? RealT étudie directement son potentiel de développement, sans intermédiaire et sans commission d'agence.",
+    privacy:"Vos informations restent confidentielles et ne servent qu'à préparer notre échange. Vous choisissez le niveau de détail que vous souhaitez nous communiquer à ce stade.",
+    situationLabel:"Votre situation",
+    situations:[
+      {id:"seul", t:"Je suis l'unique propriétaire", d:"Vous pouvez décider seul de la vente."},
+      {id:"indivision", t:"Nous sommes plusieurs propriétaires", d:"Indivision, hoirie ou PPE — nous en tenons compte dans notre approche."}
+    ],
+    objetLabel:"Votre bien",
+    communeLabel:"Commune du bien",
+    typeLabel:"Type de bien",
+    hideRelation:true,
+    condH:"Vendre directement à RealT",
+    condCta:"Échanger sur mon bien",
+    condOutro:"Une question sur la façon dont nous procédons ? Nous en parlerons lors de l'échange.",
+    schedSub:"Un échange de 20 minutes pour discuter du potentiel de votre bien, du prix et des conditions d'une vente directe.",
+    schedH:"Échangeons sur votre bien",
+    briefSubmit:"Envoyer"
+  }
+};
+
+/* ================= CONDITIONS — blocs de valeur ================= */
+const CK = '<span class="ck"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8.4L6.2 11.6L13 4.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
+function benefits(items){ return '<ul class="benefits">'+items.map(function(i){return '<li>'+CK+'<span>'+i+'</span></li>';}).join('')+'</ul>'; }
+
+const CONDITIONS = {
+  agent:{
+    mandate:'<div class="value-card"><div class="vh">Si RealT acquiert l\'opportunité</div><h4>Vous avez un mandat de vente</h4>'+
+      benefits([
+        "Une rémunération convenue sur l'apport",
+        "La commercialisation des lots futurs confiée à l'apporteur, selon les modalités convenues",
+        "Échange direct avec le promoteur-acquéreur",
+        "Les conditions sont définies ensemble avant transmission complète du dossier"
+      ])+
+      '<div class="cond-flag">'+CK+'<span><strong>Vous ne perdez pas l\'affaire en nous la présentant.</strong> Nous confions systématiquement la suite à celui qui nous a apporté la parcelle.</span></div></div>',
+    sans:'<div class="value-card"><div class="vh">Si RealT acquiert l\'opportunité</div><h4>Vous n\'avez pas de mandat</h4>'+
+      benefits([
+        "Une rémunération convenue sur l'apport",
+        "La commercialisation des lots futurs confiée à l'apporteur, selon les modalités convenues",
+        "Échange direct avec le promoteur-acquéreur",
+        "Les conditions sont définies ensemble avant transmission complète du dossier"
+      ])+
+      '<div class="cond-flag">'+CK+'<span>Votre apport repose sur l\'information elle-même : le cadre est arrêté <strong>avant</strong> que vous ne nous transmettiez quoi que ce soit de sensible.</span></div></div>'
+  },
+  architecte:{
+    default:'<div class="value-card">'+
+      benefits([
+        "Échange direct avec RealT",
+        "Collaboration définie selon votre rôle et l'avancement du projet",
+        "Conditions convenues ensemble avant d'aller plus loin"
+      ])+'</div>'
+  },
+  particulier:{
+    info:'<div class="value-card"><div class="vh">Si l\'acquisition se réalise</div><h4>Simple information</h4>'+
+      '<div class="rate-row"><div class="rate-item"><div class="rate">1 %<small>du prix d\'acquisition</small></div><div class="rl">Vous nous signalez qu\'un bien se vend</div></div></div>'+
+      benefits([
+        "Rémunération uniquement si l'acquisition se réalise",
+        "Versement à la signature de l'acte chez le notaire",
+        "Échange direct avec le promoteur-acquéreur"
+      ])+
+      '<div class="cond-flag" style="align-items:center;"><span style="flex:1;">Comment est traitée la rémunération ?</span><button class="link-btn" onclick="openFiscal()">En savoir plus</button></div></div>',
+    relation:'<div class="value-card"><div class="vh">Si l\'acquisition se réalise</div><h4>Mise en relation directe</h4>'+
+      '<div class="rate-row"><div class="rate-item"><div class="rate">2 %<small>du prix d\'acquisition</small></div><div class="rl">Vous organisez le contact avec le propriétaire</div></div></div>'+
+      benefits([
+        "Rémunération uniquement si l'acquisition se réalise",
+        "Versement à la signature de l'acte chez le notaire",
+        "Échange direct avec le promoteur-acquéreur"
+      ])+
+      '<div class="cond-flag" style="align-items:center;"><span style="flex:1;">Comment est traitée la rémunération ?</span><button class="link-btn" onclick="openFiscal()">En savoir plus</button></div></div>'
+  },
+  proprietaire:{
+    seul:'<div class="value-card alt"><div class="vh">Vente directe au promoteur</div><h4>Sans intermédiaire, sans commission d\'agence</h4>'+
+      benefits([
+        "Pas de commission d'agence",
+        "Analyse du potentiel du bien par RealT",
+        "Échange direct avec les décideurs",
+        "Aucun engagement de vendre lors de la première prise de contact"
+      ])+'</div>',
+    indivision:'<div class="value-card alt"><div class="vh">Vente directe au promoteur</div><h4>Sans intermédiaire, sans commission d\'agence</h4>'+
+      benefits([
+        "Pas de commission d'agence",
+        "Analyse du potentiel du bien par RealT",
+        "Échange direct avec les décideurs",
+        "Aucun engagement de vendre lors de la première prise de contact",
+        "Une pluralité de propriétaires n'est pas un obstacle : indivisions et hoiries font partie de notre pratique courante"
+      ])+'</div>'
+  }
+};
+
+/* ================= DOCUMENTS TYPES ================= */
+const DOCS = {
+  agent:{
+    label:"Mandat type d'apport d'affaires",
+    desc:"Le mandat type applicable aux agents immobiliers, à consulter librement avant l'entretien.",
+    version:"v1.0",
+    sections:[
+      ["Objet","Le présent document décrit le cadre de collaboration entre RealT SA et l'apporteur d'affaires pour la présentation d'une opportunité foncière, ainsi que les conditions de rémunération et de commercialisation des lots futurs."],
+      ["Apport valable","Constitue un apport valable la présentation d'une opportunité qui n'était pas déjà connue de RealT SA. L'enregistrement de la demande sur SOURCE est daté ; RealT SA procède ensuite à la vérification de l'antériorité. L'enregistrement ne constitue pas à lui seul une reconnaissance de l'apport."],
+      ["Rémunération","La rémunération est due si et seulement si l'acquisition se réalise. Elle est versée à la signature de l'acte chez le notaire. Le montant est arrêté d'un commun accord lors de l'entretien et figure dans le document définitif."],
+      ["Commercialisation des lots futurs","RealT SA confie la commercialisation des lots issus de l'opération à l'apporteur de la parcelle, selon les modalités convenues entre les parties."],
+      ["Confidentialité","Les parties s'engagent à garder confidentielles les informations échangées dans le cadre de la présentation de l'opportunité."],
+      ["Portée du document","Ce document type est communiqué à titre informatif et ne constitue aucun engagement. Le document définitif, adapté aux points discutés lors de l'entretien, sera établi ensuite."]
+    ]
+  },
+  particulier:{
+    label:"Convention type d'apport d'affaires",
+    desc:"La convention type applicable aux particuliers, à consulter librement avant l'entretien.",
+    version:"v1.0",
+    sections:[
+      ["Objet","La présente convention décrit le cadre dans lequel une personne physique présente à RealT SA une opportunité foncière."],
+      ["Apport valable","Constitue un apport valable la présentation d'une opportunité qui n'était pas déjà connue de RealT SA. L'enregistrement de la demande sur SOURCE est daté ; RealT SA procède ensuite à la vérification de l'antériorité. L'enregistrement ne constitue pas à lui seul une reconnaissance de l'apport."],
+      ["Rémunération","1 % du prix d'acquisition pour une simple information, 2 % en cas de mise en relation directe avec le propriétaire. Dans les deux cas, la rémunération n'est due que si l'acquisition se réalise, et elle est versée à la signature de l'acte chez le notaire."],
+      ["Traitement de la rémunération","De manière générale, une rémunération d'apport est imposable comme revenu. Le traitement exact dépend de la situation personnelle de l'apporteur. RealT SA peut proposer un portage salarial pour en faciliter le versement ; ce choix appartient à l'apporteur. RealT SA ne fournit pas de conseil fiscal personnalisé."],
+      ["Portée du document","Ce document type est communiqué à titre informatif et ne constitue aucun engagement. Le document définitif sera établi après l'entretien."]
+    ]
+  },
+  proprietaire:{
+    label:"Cadre type de discussion et d'acquisition",
+    desc:"Le cadre dans lequel RealT SA étudie l'acquisition d'un bien présenté directement par son propriétaire.",
+    version:"v1.0",
+    sections:[
+      ["Objet","Le présent document décrit le cadre dans lequel RealT SA étudie l'acquisition d'un bien présenté directement par son propriétaire."],
+      ["Absence de commission d'agence","La transaction s'effectuant en direct, aucune commission d'agence n'est prélevée."],
+      ["Étude préalable","RealT SA étudie le potentiel de développement du bien avant l'entretien. Cette étude est menée à ses frais et n'engage pas le propriétaire."],
+      ["Absence d'engagement","La prise de contact et l'entretien n'emportent aucun engagement de vendre pour le propriétaire, ni d'acquérir pour RealT SA."],
+      ["Suite du processus","Si les parties souhaitent avancer, un accord d'exclusivité de négociation d'une durée déterminée peut être proposé afin de permettre les études nécessaires. Le prix et les modalités de la vente sont arrêtés d'un commun accord."],
+      ["Portée du document","Ce document type est communiqué à titre informatif et ne constitue aucun engagement de vente ni d'achat."]
+    ]
+  }
+};
+
+const FISCAL_DOC = {
+  label:"Comment est traitée la rémunération",
+  version:"note d'information",
+  sections:[
+    ["Principe général","De manière générale, une rémunération perçue au titre d'un apport d'affaires est considérée comme un revenu et doit être déclarée. Le traitement exact dépend de votre situation personnelle : statut, canton de domicile, activité principale."],
+    ["Portage salarial","Si vous êtes salarié et que vous le souhaitez, RealT SA peut vous proposer un portage salarial. La rémunération vous est alors versée sous forme de salaire, avec les cotisations correspondantes, ce qui simplifie votre déclaration. Ce choix vous appartient entièrement."],
+    ["Moment du versement","La rémunération est versée à la signature de l'acte chez le notaire, et uniquement si l'acquisition se réalise."],
+    ["Limites","SOURCE et RealT SA ne fournissent pas de conseil fiscal personnalisé. Ces éléments seront confirmés avec vous lors de l'entretien, et nous vous invitons à valider votre situation particulière avec votre fiduciaire."]
+  ]
+};
+
+/* ================= UTILITAIRES ================= */
+function $(id){return document.getElementById(id);}
+function val(id){var e=$(id);return e?e.value.trim():"";}
+function setStepIndex(t){$("stepIndex").textContent=t;}
+function showScreen(id){
+  var target=document.getElementById(id);
+  if(!target){ console.error("Écran introuvable :", id); return; }
+  var all=document.querySelectorAll(".screen");
+  for(var i=0;i<all.length;i++) all[i].classList.remove("active");
+  target.classList.add("active");
+  /* Défilement instantané : Safari iOS interrompt parfois un scroll fluide
+     lancé pendant un changement de DOM, et la nouvelle vue reste hors écran. */
+  try{ window.scrollTo(0,0); }catch(e){}
+}
+function goProfil(){
+  showScreen("screen-profil");
+  setStepIndex("choix du profil");
+}
+function scrollToHow(){ var e=$("sec-how"); if(e) e.scrollIntoView({behavior:"smooth",block:"start"}); }
+
+function horodatage(){
+  var d=new Date();
+  return d.toLocaleDateString("fr-CH")+" à "+d.toLocaleTimeString("fr-CH",{hour:"2-digit",minute:"2-digit"});
+}
+function set2(id,prop,valeur){ var e=$(id); if(e) e[prop]=valeur; }
+function cell(k,v,mono){
+  return "<div class='rcell'><div class='k'>"+k+"</div><div class='v"+(mono?" mono":"")+"'>"+esc(v||"—")+"</div></div>";
+}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+const STEP_NAMES=["Opportunité","Prise d'informations","Conditions","Échange"];
+function renderBar(barId,current){
+  var el=$(barId); el.innerHTML="";
+  for(var i=0;i<STEP_NAMES.length;i++){
+    var idx=i+1;
+    var d=document.createElement("div");
+    d.className="sb "+(idx<current?"done":idx===current?"now":"");
+    d.innerHTML="<span class='dot'>"+(idx<current?"✓":idx)+"</span><span>"+STEP_NAMES[i]+"</span>";
+    el.appendChild(d);
+    if(i<STEP_NAMES.length-1){var sep=document.createElement("div");sep.className="sb-sep";el.appendChild(sep);}
+  }
+}
+
+/* ================= ÉTAPE 1 ================= */
+function startFlow(p){
+  if(!p || !PROFILES[p]){ console.error("Profil SOURCE invalide :", p); return; }
+  opp = nouvelleOpportunite();
+  opp.profil = p;
+  var P=PROFILES[p];
+
+  /* Aucune référence DOM manquante ne doit interrompre le parcours. */
+  var set = function(id, prop, valeur){ var e=$(id); if(e) e[prop]=valeur; };
+  var show= function(id, valeur){ var e=$(id); if(e) e.style.display=valeur; };
+
+  set("brief-title","textContent",P.name);
+  set("brief-privacy","textContent",P.privacy);
+  set("brief-h","textContent",P.briefH);
+  set("brief-sub","textContent",P.briefSub);
+  set("sec-objet","textContent",P.objetLabel);
+  set("l-commune","textContent",P.communeLabel||"Commune");
+  set("l-type","textContent",P.typeLabel||"Type de bien / opportunité");
+  show("g-relation", P.hideRelation?"none":"block");
+  set("brief-submit","textContent",P.briefSubmit||"Envoyer");
+
+  if(P.societe){
+    show("g-societe","block");
+    set("l-societe","textContent",P.societe);
+    set("f-societe","placeholder",P.societePh||"");
+  } else { show("g-societe","none"); }
+
+  show("g-avancement", P.avancement ? "block" : "none");
+
+  var box=$("situation-block");
+  var secSit=$("sec-situation");
+  if(!box){ console.error("Bloc situation introuvable"); }
+  if(box) box.innerHTML="";
+  var divider=$("divider-situation");
+  if(!P.situations){
+    /* Profil sans distinction contractuelle : le bloc entier disparaît. */
+    if(box) box.style.display="none";
+    if(secSit) secSit.style.display="none";
+    if(divider) divider.style.display="none";
+    opp.situation="default";
+  } else if(box) {
+    box.style.display="flex";
+    if(divider) divider.style.display="block";
+    if(secSit){ secSit.style.display="block"; secSit.textContent=P.situationLabel; }
+    P.situations.forEach(function(sit){
+    var b=document.createElement("button");
+    b.className="choice-card";
+    b.innerHTML="<span class='ct'>"+sit.t+"</span><span class='cd'>"+sit.d+"</span>";
+    b.onclick=function(){
+      if(p==="particulier" && sit.id==="proprio"){ startFlow("proprietaire"); return; }
+      opp.situation=sit.id;
+      clearErr(null,"ferr-situation");
+      box.classList.remove("invalid");
+      var cards=box.querySelectorAll(".choice-card");
+      for(var i=0;i<cards.length;i++) cards[i].classList.remove("sel");
+      b.classList.add("sel");
+    };
+      box.appendChild(b);
+    });
+  }
+
+  clearAllErrs();
+  renderBar("bar-brief",1);
+  showScreen("screen-brief");
+  setStepIndex(P.name.toLowerCase()+" · opportunité");
+}
+
+/* ---------- validation ---------- */
+function validEmail(v){
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+}
+function validPhone(v){
+  var digits=v.replace(/\D/g,"");
+  if(digits.indexOf("00")===0) digits=digits.slice(2);
+  if(digits.indexOf("41")===0 && digits.length===11) digits="0"+digits.slice(2);
+  if(/^0\d{9}$/.test(digits)) return true;      // format suisse : 079 000 00 00
+  return digits.length>=10 && digits.length<=15; // international
+}
+function setErr(field,errId,msg){
+  var e=$(errId);
+  if(e){ if(msg) e.textContent=msg; e.classList.add("on"); }
+  if(field) field.classList.add("invalid");
+}
+function clearErr(field,errId){
+  var e=$(errId);
+  if(e) e.classList.remove("on");
+  if(field) field.classList.remove("invalid");
+}
+function clearAllErrs(){
+  ["prenom","nom","email","tel","commune"].forEach(function(k){ clearErr($("f-"+k),"ferr-"+k); });
+  clearErr(null,"ferr-situation"); $("situation-block").classList.remove("invalid");
+  clearErr(null,"ferr-slot");
+}
+
+/* ---------- Validation du formulaire ---------- */
+var ERR_ICON='<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#8E3B2A" stroke-width="1.3"/><path d="M7 4V7.6M7 9.8V10" stroke="#8E3B2A" stroke-width="1.4" stroke-linecap="round"/></svg>';
+
+function emailValide(v){
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+}
+function telValide(v){
+  var digits=v.replace(/\D/g,"");
+  if(/^(\+41|0041)/.test(v.replace(/\s/g,""))) return digits.length>=11 && digits.length<=13;
+  return digits.length>=10 && digits.length<=13;   // format national : 079 000 00 00
+}
+function setErr(inputId,msgId,msg){
+  var inp=$(inputId), box=$(msgId);
+  if(inp) inp.classList.add("err");
+  if(box){ box.innerHTML=ERR_ICON+"<span>"+msg+"</span>"; box.classList.add("on"); }
+}
+function clearErr(el){
+  el.classList.remove("err");
+  var map={"f-prenom":"e-prenom","f-nom":"e-nom","f-email":"e-email","f-tel":"e-tel","f-commune":"e-commune"};
+  var m=map[el.id];
+  if(m && $(m)) $(m).classList.remove("on");
+  var fa=$("form-alert");
+  if(fa) fa.classList.remove("on");
+}
+function clearAllErrs(){
+  ["f-prenom","f-nom","f-email","f-tel","f-commune"].forEach(function(id){ var e=$(id); if(e) e.classList.remove("err"); });
+  ["e-prenom","e-nom","e-email","e-tel","e-commune","e-situation","e-slot"].forEach(function(id){ var e=$(id); if(e) e.classList.remove("on"); });
+  var sb=$("situation-block"); if(sb) sb.classList.remove("err-box");
+  var fa=$("form-alert"); if(fa) fa.classList.remove("on");
+}
+
+function submitBrief(){
+  clearAllErrs();
+  var errs=[];
+
+  if(!val("f-prenom")) errs.push({i:"f-prenom",m:"e-prenom",t:"Votre prénom est requis.",label:"le prénom"});
+  if(!val("f-nom"))    errs.push({i:"f-nom",m:"e-nom",t:"Votre nom est requis.",label:"le nom"});
+
+  var email=val("f-email");
+  if(!email) errs.push({i:"f-email",m:"e-email",t:"Votre adresse e-mail est requise.",label:"l'e-mail"});
+  else if(!emailValide(email)) errs.push({i:"f-email",m:"e-email",t:"Cette adresse e-mail semble incomplète — vérifiez le format (ex : prenom.nom@exemple.ch).",label:"l'e-mail"});
+
+  var tel=val("f-tel");
+  if(!tel) errs.push({i:"f-tel",m:"e-tel",t:"Votre numéro de téléphone est requis.",label:"le téléphone"});
+  else if(!telValide(tel)) errs.push({i:"f-tel",m:"e-tel",t:"Ce numéro semble incomplet — 10 chiffres attendus (ex : 079 000 00 00) ou format international +41.",label:"le téléphone"});
+
+  if(PROFILES[opp.profil].situations && !opp.situation){
+    errs.push({i:null,m:"e-situation",t:"Merci de sélectionner votre situation ci-dessus.",label:"votre situation"});
+    var sb=$("situation-block"); if(sb) sb.classList.add("err-box");
+  }
+
+  if(!val("f-commune")) errs.push({i:"f-commune",m:"e-commune",t:"La commune est requise — elle nous permet une première lecture de l'opportunité.",label:"la commune"});
+
+  if(errs.length){
+    errs.forEach(function(e){ if(e.i) setErr(e.i,e.m,e.t); else { var b=$(e.m); if(b){ b.innerHTML=ERR_ICON+"<span>"+e.t+"</span>"; b.classList.add("on"); } } });
+    var fa=$("form-alert");
+    if(fa){
+      var labels=errs.map(function(e){ return e.label; });
+      var listing = labels.length>1 ? labels.slice(0,-1).join(", ")+" et "+labels[labels.length-1] : labels[0];
+      fa.textContent = (errs.length>1 ? "Il manque encore quelques éléments : " : "Il manque encore un élément : ")+listing+".";
+      fa.classList.add("on");
+    }
+    var firstEl = errs[0].i ? $(errs[0].i) : $("situation-block");
+    if(firstEl){ firstEl.scrollIntoView({behavior:"smooth",block:"center"}); if(errs[0].i) setTimeout(function(){ firstEl.focus(); },350); }
+    return;
+  }
+
+  opp.contact={prenom:val("f-prenom"),nom:val("f-nom"),societe:val("f-societe"),email:email,telephone:tel};
+  opp.bien={commune:val("f-commune"),type:val("f-type"),ordreDeGrandeur:val("f-taille"),zoneAffectation:val("f-zone"),avancement:val("f-avancement"),
+            relation:val("f-relation"),parcelle:val("f-parcelle"),calendrier:val("f-calendrier"),commentaires:val("f-notes")};
+  opp.reference=genererReference();
+  opp.creeLe=horodatage();
+  opp.statut="Reçue";
+
+  var btn=$("brief-submit");
+  var libelle=btn?btn.innerHTML:"";
+  if(btn){ btn.disabled=true; btn.textContent="Envoi en cours…"; }
+
+  envoyerOpportunite(opp).then(function(res){
+    if(btn){ btn.disabled=false; btn.innerHTML=libelle; }
+
+    if(!res.ok && res.code!=="non_configure"){
+      var fa=$("form-alert");
+      if(fa){
+        fa.innerHTML = (ERREURS_ENVOI[res.code]||ERREURS_ENVOI.refus)+
+          " Vous pouvez aussi nous écrire à <a href='mailto:"+CONFIG.emailContact+"' style='color:inherit'>"+CONFIG.emailContact+"</a>.";
+        fa.classList.add("on");
+        fa.scrollIntoView({behavior:"smooth",block:"center"});
+      }
+      return;   /* on n'avance pas : la demande n'est pas partie */
+    }
+
+    afficherRecu(res.code==="non_configure");
+  });
+}
+
+function afficherRecu(modeDemo){
+  var P=PROFILES[opp.profil];
+  set2("verif-title","textContent",P.name);
+  set2("verif-h","textContent", opp.contact.prenom ? opp.contact.prenom+", votre opportunité a bien été reçue" : "Votre opportunité a bien été reçue");
+  set2("verif-sub","textContent","Nous allons en prendre connaissance avant notre échange.");
+
+  var recu=$("verif-receipt");
+  if(recu) recu.innerHTML=
+    "<div class='ref-line'><span class='rk'>Référence</span><span class='rvv'>"+opp.reference+"</span>"+
+    "<span class='rk'>Reçue le</span><span class='rvv'>"+opp.creeLe+"</span></div>";
+
+  var dev=$("verif-dev");
+  if(dev){
+    if(modeDemo){
+      dev.className="info-block warn on";
+      dev.innerHTML="<strong>Envoi non encore activé.</strong> Cette demande n'a été transmise à personne : renseignez la clé Web3Forms pour activer la réception des opportunités.";
+    } else { dev.className="info-block"; dev.innerHTML=""; }
+  }
+
+  renderBar("bar-verif",2);
+  showScreen("screen-verif");
+  setStepIndex(P.name.toLowerCase()+" · prise d'informations");
+}
+function backToBrief(){ renderBar("bar-brief",1); showScreen("screen-brief"); }
+
+/* ================= ÉTAPE 3 ================= */
+function goConditions(){
+  var P=PROFILES[opp.profil];
+  var c=CONDITIONS[opp.profil];
+  $("cond-title").textContent=P.name;
+  $("cond-h").textContent=P.condH;
+  $("cond-sub").textContent = P.condSub || "Voici le cadre que nous appliquons. Rien n'est signé à ce stade — vous pourrez en discuter et le faire évoluer lors de l'entretien.";
+  $("cond-body").innerHTML=(c&&c[opp.situation])?c[opp.situation]:"<div class='value-card'><p>Les conditions applicables à votre situation vous seront présentées lors de l'entretien.</p></div>";
+  $("cond-outro").textContent=P.condOutro;
+  $("cond-cta").innerHTML=esc(P.condCta)+" <span>→</span>";
+  /* L'architecte n'a pas de document type : la collaboration se définit lors de l'échange. */
+  var docBlock=document.querySelector(".doc-row");
+  var d=DOCS[opp.profil];
+  if(P.sansDocument || !d){
+    docBlock.style.display="none";
+  } else {
+    docBlock.style.display="block";
+    $("doc-title").textContent=d.label;
+    $("doc-desc").textContent=d.desc;
+  }
+  $("cond-outro").style.display = P.condOutro ? "block" : "none";
+  renderBar("bar-cond",3);
+  showScreen("screen-conditions");
+  setStepIndex(PROFILES[opp.profil].name.toLowerCase()+" · conditions");
+}
+function backToVerif(){ renderBar("bar-verif",2); showScreen("screen-verif"); }
+
+/* ================= DOCUMENTS ================= */
+var currentDoc=null;
+function renderDoc(d){
+  currentDoc=d;
+  $("modal-title").textContent=d.label;
+  $("modal-sub").textContent="RealT SA · "+d.version+" · généré le "+new Date().toLocaleDateString("fr-CH");
+  $("modal-body").innerHTML=d.sections.map(function(s){return "<h5>"+s[0]+"</h5><p>"+s[1]+"</p>";}).join("");
+  $("modalBg").classList.add("open");
+}
+function openDoc(){ renderDoc(DOCS[opp.profil]); }
+function openFiscal(){ renderDoc(FISCAL_DOC); }
+function closeDoc(){ $("modalBg").classList.remove("open"); }
+
+/* ---- PDF (point 6) ---- */
+function downloadPdf(){
+  var d=currentDoc||DOCS[opp.profil];
+  if(!window.jspdf||!window.jspdf.jsPDF){ console.error("jsPDF indisponible"); return; }
+  var doc=new window.jspdf.jsPDF({unit:"mm",format:"a4"});
+  var W=210, M=22, y=0;
+  var GREEN=[43,74,59], INK=[29,35,31], MUT=[107,111,102], LINE=[218,216,206];
+
+  /* Bandeau logo */
+  doc.setFillColor(38,63,52); doc.rect(0,0,W,4,"F");
+  y=26;
+  /* Signe SOURCE — deux lames */
+  doc.setFillColor(195,171,152);
+  doc.moveTo(M+14.5,y-13); 
+  doc.setFillColor(195,171,152);
+  doc.lines([[-6,2],[-6.5,5],[-2.5,5.5],[1,4],[4.5,2],[-2,-2.5],[-2.5,-4],[1.5,-5],[6,-5],[6.5,-2]], M+14.5, y-13, [1,1], "F");
+  doc.setFillColor(38,63,52);
+  doc.lines([[5,1.6],[3,3.5],[-0.5,4],[-4,3.5],[-7,3],[5,-3],[3,-3.5],[0.5,-4],[-1.5,-4],[-3.5,-2.5]], M+8, y-5.5, [1,1], "F");
+  /* Lock-up texte */
+  doc.setFont("helvetica","normal"); doc.setFontSize(15); doc.setTextColor(38,63,52);
+  doc.text("S O U R C E", M+30, y-4);
+  doc.setFont("helvetica","normal"); doc.setFontSize(7); doc.setTextColor(115,118,111);
+  doc.text("b y   R E A L T", M+30, y);
+  /* Société à droite */
+  doc.setFontSize(8); doc.setTextColor(115,118,111);
+  doc.text("RealT SA", W-M, y-4, {align:"right"});
+  doc.text("Morges, Suisse", W-M, y, {align:"right"});
+
+  y+=10;
+  doc.setDrawColor(213,213,207); doc.setLineWidth(0.3); doc.line(M,y,W-M,y);
+
+  /* Titre */
+  y+=14;
+  doc.setFont("helvetica","bold"); doc.setFontSize(17); doc.setTextColor(23,26,24);
+  var titre=doc.splitTextToSize(d.label, W-2*M);
+  doc.text(titre, M, y); y+=titre.length*7.5;
+
+  /* Méta */
+  y+=2;
+  doc.setFont("helvetica","normal"); doc.setFontSize(8.5); doc.setTextColor(115,118,111);
+  doc.text("Version "+d.version+"   ·   Généré le "+new Date().toLocaleDateString("fr-CH")+(opp.reference?"   ·   Réf. "+opp.reference:""), M, y);
+
+  /* Encart non contractuel */
+  y+=8;
+  doc.setFillColor(242,241,237); doc.setDrawColor(213,213,207); doc.setLineWidth(0.3);
+  doc.rect(M,y,W-2*M,11,"FD"); doc.setFillColor(38,63,52); doc.rect(M,y,1.2,11,"F");
+  doc.setFont("helvetica","bold"); doc.setFontSize(8.5); doc.setTextColor(38,63,52);
+  doc.text("DOCUMENT TYPE — NON CONTRACTUEL", M+5, y+4.6);
+  doc.setFont("helvetica","normal"); doc.setFontSize(7.5);
+  doc.text("Communiqué à titre informatif. Le document définitif est établi après l'entretien.", M+5, y+8.4);
+  y+=19;
+
+  /* Corps */
+  d.sections.forEach(function(s){
+    if(y>250){ doc.addPage(); y=26; }
+    doc.setFont("helvetica","bold"); doc.setFontSize(8.5); doc.setTextColor(38,63,52);
+    doc.text(s[0].toUpperCase(), M, y); y+=5.5;
+    doc.setFont("helvetica","normal"); doc.setFontSize(9.5); doc.setTextColor(23,26,24);
+    var lines=doc.splitTextToSize(s[1], W-2*M);
+    for(var i=0;i<lines.length;i++){
+      if(y>276){ doc.addPage(); y=26; }
+      doc.text(lines[i], M, y); y+=5;
+    }
+    y+=6;
+  });
+
+  /* Pied sur chaque page */
+  var pages=doc.internal.getNumberOfPages();
+  for(var p=1;p<=pages;p++){
+    doc.setPage(p);
+    doc.setDrawColor(213,213,207); doc.setLineWidth(0.3);
+    doc.line(M,281,W-M,281);
+    doc.setFont("helvetica","normal"); doc.setFontSize(7.5); doc.setTextColor(115,118,111);
+    doc.text("RealT SA · Morges · realt.swiss · Pierre Tranchant & Cédric Loubet", M, 286);
+    doc.text(p+" / "+pages, W-M, 286, {align:"right"});
+  }
+
+  doc.save("source-"+(opp.profil||"document")+"-"+d.version+".pdf");
+}
+
+/* ================= ÉTAPE 4 ================= */
+function goSchedule(){
+  var P=PROFILES[opp.profil];
+  set2("sched-title","textContent",P.name);
+  set2("sched-h","textContent",P.schedH||"Échangeons sur votre opportunité");
+  set2("sched-sub","textContent",P.schedSub);
+
+  var banner=$("slots-state");
+  var manuel=$("resa-manuelle");
+  var embed=$("calendly-embed");
+
+  if(!calendlyPret()){
+    /* Aucun agenda connecté : on le dit clairement plutôt que de simuler. */
+    if(banner){
+      banner.className="info-block warn on";
+      banner.innerHTML="<strong>Prise de rendez-vous pas encore active.</strong> Renseignez l'URL Calendly dans la configuration pour afficher les disponibilités réelles.";
+    }
+    if(embed) embed.innerHTML="";
+    if(manuel) manuel.style.display="flex";
+  } else {
+    if(banner){ banner.className="info-block"; banner.innerHTML=""; }
+    if(manuel) manuel.style.display="none";
+    monterCalendly();
+  }
+
+  renderBar("bar-sched",4);
+  showScreen("screen-schedule");
+  setStepIndex(P.name.toLowerCase()+" · échange");
+}
+
+/* Le widget est monté à chaque passage, avec les informations déjà saisies :
+   le visiteur n'a pas à retaper son nom ni son e-mail. */
+function monterCalendly(){
+  var embed=$("calendly-embed");
+  if(!embed) return;
+  embed.innerHTML="";
+
+  if(!window.Calendly){
+    /* widget.js chargé en async : on réessaie brièvement */
+    var essais=0;
+    var t=setInterval(function(){
+      essais++;
+      if(window.Calendly){ clearInterval(t); monterCalendly(); }
+      else if(essais>20){
+        clearInterval(t);
+        var banner=$("slots-state");
+        if(banner){ banner.className="info-block warn on"; banner.textContent="Le calendrier n'a pas pu être chargé. Réessayez, ou écrivez-nous à "+CONFIG.emailContact+"."; }
+      }
+    },250);
+    return;
+  }
+
+  window.Calendly.initInlineWidget({
+    url: CONFIG.calendlyUrl + "?hide_gdpr_banner=1&primary_color=21453A",
+    parentElement: embed,
+    prefill: {
+      name:  opp.contact.prenom + " " + opp.contact.nom,
+      email: opp.contact.email,
+      customAnswers: {
+        a1: opp.reference,
+        a2: PROFILES[opp.profil].name + " — " + (opp.bien.commune||"")
+      }
+    }
+  });
+}
+
+/* Calendly signale la réservation par postMessage : c'est le seul moment
+   où l'on affiche la confirmation. Aucune fausse validation possible. */
+function initCalendlyEcoute(){
+  window.addEventListener("message", function(e){
+    if(!e.data || typeof e.data.event !== "string") return;
+    if(e.data.event.indexOf("calendly") !== 0) return;
+    if(e.data.event === "calendly.event_scheduled"){
+      opp.statut="Rendez-vous prévu";
+      opp.entretien.evenementCalendrier = (e.data.payload && e.data.payload.event && e.data.payload.event.uri) || null;
+      afficherConfirmation();
+    }
+  });
+}
+
+function backToConditions(){ renderBar("bar-cond",3); showScreen("screen-conditions"); }
+
+function confirmSchedule(){
+  /* Chemin de repli, actif uniquement tant que Calendly n'est pas configuré. */
+  var e=$("e-slot");
+  if(e){
+    e.innerHTML=ERR_ICON+"<span>La prise de rendez-vous en ligne n'est pas encore active. Écrivez-nous à "+CONFIG.emailContact+" et nous conviendrons d'un créneau.</span>";
+    e.classList.add("on");
+  }
+}
+
+function afficherConfirmation(){
+  set2("done-h","textContent","Votre échange est confirmé");
+  set2("done-sub","textContent","Votre rendez-vous avec Pierre Tranchant est confirmé. L'invitation et le lien de visioconférence viennent de vous être envoyés par e-mail.");
+
+  var etapes=[
+    {t:"Opportunité reçue", done:true},
+    {t:"Rendez-vous réservé", done:true},
+    {t:"Prise de connaissance par RealT", done:false},
+    {t:"Échange avec Pierre Tranchant", done:false},
+    {t:"Si accord : établissement du document définitif", done:false},
+    {t:"Transmission complète de l'opportunité", done:false}
+  ];
+  var tl=$("done-timeline");
+  if(tl) tl.innerHTML=etapes.map(function(e){
+    var tick = e.done
+      ? "<span class='tick'><svg width='18' height='18' viewBox='0 0 18 18' fill='none'><circle cx='9' cy='9' r='9' fill='#2F7155'/><path d='M5 9.3L7.6 11.9L13 6.3' stroke='#fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg></span>"
+      : "<span class='tick'><svg width='18' height='18' viewBox='0 0 18 18' fill='none'><circle cx='9' cy='9' r='8.2' stroke='#DDE1DD' stroke-width='1.5'/></svg></span>";
+    return "<div class='timeline-row"+(e.done?"":" pending")+"'>"+tick+"<div>"+e.t+"</div></div>";
+  }).join("");
+
+  var r=$("done-receipt");
+  if(r) r.innerHTML=
+    "<div class='rhead'><span class='rl'>Source / Rendez-vous</span><span class='rv'>"+opp.reference+"</span></div>"+
+    "<div class='rgrid'>"+
+      cell("Interlocuteur", "Pierre Tranchant")+
+      cell("Société", "RealT SA")+
+      cell("Format", "Visioconférence")+
+      cell("Contact", opp.contact.email)+
+    "</div>";
+
+  var mb=$("meet-block");
+  if(mb) mb.style.display="none";   /* le lien arrive par e-mail via Calendly */
+
+  showScreen("screen-done");
+  setStepIndex("rendez-vous confirmé");
+}
+
+function goHome(){
+  opp=nouvelleOpportunite();
+  showScreen("screen-home");
+  setStepIndex("accueil");
+}
+
+/* ================= ASSISTANT SOURCE ================= */
+/* =====================================================================
+   BASE DE CONNAISSANCES — ASSISTANT SOURCE
+   Règle absolue : ne jamais inventer une condition commerciale, juridique,
+   fiscale ou un critère d'acquisition. Hors périmètre → FALLBACK.
+   cta:"presenter" → bouton « Présenter mon opportunité »
+   cta:"rdv"       → bouton « Réserver un échange »
+   ===================================================================== */
+var KB=[
+
+  /* 1 — Qu'est-ce que SOURCE */
+  {k:["est-ce que source","quoi source","sert source","cette plateforme","comment fonctionne source","source c est quoi","pourquoi source","parlez-moi de source","présentez source","presentez source","source"],
+   a:"SOURCE est la plateforme de sourcing immobilier de RealT SA. Elle permet aux agents immobiliers, architectes, particuliers et propriétaires de présenter directement une opportunité immobilière à RealT. L'objectif est de qualifier une première fois l'opportunité, de présenter clairement le cadre de collaboration, puis d'organiser un échange direct avec RealT, promoteur-acquéreur.",
+   cta:"presenter"},
+
+  /* 2 — Qui est RealT */
+  {k:["qui est realt","qui êtes-vous","qui etes-vous","votre société","votre societe","vous êtes qui","vous etes qui","connais pas","votre entreprise"],
+   a:"RealT SA est active dans la promotion et le développement immobilier en Suisse romande. SOURCE permet de lui présenter directement des opportunités susceptibles de correspondre à ses critères de développement et d'acquisition. Le site realt.swiss présente la société."},
+
+  /* 3 — Agence ou intermédiaire */
+  {k:["agence immobilière","agence immobiliere","êtes-vous une agence","etes-vous une agence","intermédiaire","intermediaire","courtier","marketplace","vous prenez une commission sur moi"],
+   a:"Dans le cadre de SOURCE, RealT intervient comme promoteur-acquéreur potentiel. Vous présentez donc l'opportunité directement à l'entreprise susceptible de l'acquérir et de la développer, sans intermédiaire supplémentaire."},
+
+  /* 4 — Qui peut présenter */
+  {k:["qui peut","qui peut utiliser","je suis qui","suis-je concerné","suis-je concerne","est-ce pour moi","profils"],
+   a:"SOURCE s'adresse aux agents immobiliers, aux architectes, aux professionnels disposant d'une opportunité, aux particuliers qui connaissent un propriétaire susceptible de vendre, et aux propriétaires souhaitant présenter directement leur bien à RealT.",
+   cta:"presenter"},
+
+  /* 5 — Critères */
+  {k:["quels terrains","que recherchez-vous","critère","critere","vous achetez quoi","type de bien recherché","recherchez-vous","sbp","surface minimum","zone"],
+   a:"RealT recherche du résidentiel en Suisse romande, idéalement à partir de 500 m² de surface brute de plancher, pour des opérations de 2 à une cinquantaine de lots. Les terrains conditionnés et les ventes à terme sont privilégiés, et les terrains avec permis de construire en force peuvent aussi être acquis.",
+   cta:"presenter"},
+
+  /* 5b — Confrontation d'une opportunité aux critères */
+  {k:["est-ce que ça vous intéresse","est-ce que ca vous interesse","cela vous intéresse","cela vous interesse","j'ai un terrain","j'ai un immeuble","j'ai une villa","ça correspond","ca correspond","mon terrain fait","est-ce que vous prenez"],
+   a:"Sur la base d'éléments généraux, je ne peux pas confirmer notre intérêt : chaque opportunité demande une analyse plus précise. Si elle se situe en Suisse romande, sur du résidentiel, et qu'elle présente un potentiel de développement, elle mérite d'être présentée à RealT. Même si elle s'écarte de nos critères habituels, vous pouvez nous transmettre les informations principales pour que RealT l'examine.",
+   cta:"presenter"},
+
+  /* 6 — Budget */
+  {k:["budget","jusqu'à combien","jusqu a combien","quel prix","combien pouvez-vous","capacité d'achat","capacite d'achat","montant maximum","plafond"],
+   a:"RealT étudie les opportunités au cas par cas, en fonction de leur potentiel de développement. Je ne peux pas vous indiquer de budget maximum ici."},
+
+  /* 7 — Off-market */
+  {k:["off-market","off market","déjà en vente","deja en vente","doit-il déjà être","doit-il deja etre","sur le marché","sur le marche","pas encore en vente","doit être en vente","doit etre en vente","discret","confidentiel vendeur"],
+   a:"Non, le bien n'a pas besoin d'être déjà sur le marché. SOURCE est particulièrement adaptée aux opportunités off-market ou encore peu diffusées. L'essentiel est qu'elle puisse correspondre aux critères de RealT et faire l'objet d'un échange avec le propriétaire ou ses représentants.",
+   cta:"presenter"},
+
+  /* 8 — Quelles informations transmettre */
+  {k:["adresse exacte","dois-je donner l'adresse","nom du propriétaire","nom du proprietaire","quelles informations","que dois-je transmettre","quoi fournir","quelles données","quelles donnees","documents à fournir"],
+   a:"Pas nécessairement lors de la première prise de contact. Vous pouvez commencer par transmettre les éléments qui permettent à RealT de comprendre la nature de l'opportunité. L'adresse exacte, l'identité du propriétaire et les documents sensibles peuvent être communiqués progressivement, notamment après discussion du cadre de collaboration."},
+
+  /* 9 — Protection de l'affaire */
+  {k:["comment protégez","comment protegez","contourné","contourne","court-circuit","me faire avoir","prouver que je vous ai","protection","protégée","protegee","sécuriser mon apport","securiser mon apport","confiance","me passer dessus","doubler"],
+   a:"Votre demande est enregistrée et horodatée dans SOURCE. RealT vérifie ensuite si l'opportunité était déjà connue ou avait déjà été présentée. Les conditions de collaboration peuvent être discutées avec RealT avant la transmission complète des informations sensibles. L'horodatage date la transmission effectuée via SOURCE, mais ne constitue pas à lui seul une reconnaissance automatique d'un droit à rémunération."},
+
+  /* 10 — Affaire déjà connue */
+  {k:["déjà connue","deja connue","déjà proposé","deja propose","autre promoteur","deux personnes","même affaire","meme affaire","doublon","antériorité","anteriorite"],
+   a:"RealT vérifie l'antériorité de l'opportunité afin de déterminer si elle était déjà connue ou avait déjà été présentée. En cas de correspondance ou de situation nécessitant une vérification, RealT examine le dossier avant de confirmer le cadre applicable à l'apport."},
+
+  /* 11 — Horodatage et commission */
+  {k:["horodatage","daté","date de dépôt","ça me donne droit","droit à commission","droit a commission","est-ce que ça me garantit","garantit"],
+   a:"Non. L'horodatage permet de dater la transmission effectuée via SOURCE. Il ne constitue pas à lui seul une reconnaissance automatique d'un droit à rémunération. Le droit éventuel à rémunération dépend du cadre contractuel convenu avec RealT et de la réalisation des conditions prévues."},
+
+  /* 12 — Signature */
+  {k:["dois-je signer","signer","signature","signe","engagement immédiat","je m'engage","suis-je engagé","suis-je engage"],
+   a:"Non. SOURCE permet d'abord de comprendre le fonctionnement de la collaboration et de consulter le document type correspondant à votre situation. Aucune signature n'est demandée sur SOURCE à ce stade. Les conditions peuvent être discutées avec RealT lors de l'échange, avant l'établissement du document définitif."},
+
+  /* 13 — Consulter le document */
+  {k:["consulter le mandat","voir le mandat","document type","mandat type","convention type","lire le contrat","le document avant"],
+   a:"Oui. Le document type correspondant à votre situation peut être consulté et téléchargé sur SOURCE avant l'échange avec RealT. Il présente le cadre général proposé et ne constitue pas, à ce stade, un engagement définitif des parties."},
+
+  /* 14 — Négociation des conditions */
+  {k:["négociable","negociable","négocier","negocier","modifier le mandat","discuter les conditions","conditions particulières","conditions particulieres","adapter les conditions"],
+   a:"Oui. Les conditions présentées sur SOURCE constituent le cadre standard proposé par RealT. Lorsqu'une situation particulière le justifie, elles peuvent être discutées directement avec RealT lors de l'échange. Le document définitif reprend ensuite les conditions effectivement convenues entre les parties.",
+   cta:"rdv"},
+
+  /* 15 — Rémunération agent */
+  {k:["commission agent","rémunération agent","remuneration agent","combien gagne un agent","je suis agent combien","apport d'affaires combien","combien pour un agent"],
+   a:"La rémunération standard pour un apport d'affaires réalisé par un agent immobilier est de l'ordre de 3 %. Les conditions exactes dépendent de l'opportunité et peuvent être discutées directement avec RealT lors de l'échange. La rémunération et ses conditions sont ensuite définies dans le document contractuel applicable.",
+   cta:"rdv"},
+
+  /* 16 — Rémunération particulier */
+  {k:["1%","2%","particulier combien","je suis un particulier","simple information","mise en relation","tuyau","je connais quelqu'un qui vend"],
+   a:"Pour un particulier : 1 % pour une information qualifiée, 2 % en cas de mise en relation directe avec le propriétaire. Dans les deux cas, la rémunération dépend de la réalisation effective de l'opération et des conditions prévues dans la convention."},
+
+  /* 17 — Architecte */
+  {k:["architecte","sia","honoraires","mission d'architecte","je suis architecte","étude d'implantation","etude d'implantation","bureau d'architecture"],
+   a:"Pour un architecte, les modalités de collaboration dépendent du projet, de son état d'avancement et de votre rôle actuel. Il n'y a donc pas de cadre standard imposé sur SOURCE. Présentez-nous simplement l'opportunité et nous en discuterons directement avec vous.",
+   cta:"rdv"},
+
+  /* 18 — Propriétaire */
+  {k:["je suis propriétaire","je suis proprietaire","vendre mon terrain","vendre mon bien","mon bien","proposer mon terrain","vendre directement","sans agence","commission d'agence"],
+   a:"Oui, un propriétaire peut présenter directement son bien à RealT via SOURCE. Vous êtes ainsi en relation directe avec le promoteur-acquéreur potentiel, sans passer par un apporteur d'affaires ni supporter de commission d'agence. Vous pouvez commencer par transmettre les principales caractéristiques du bien, puis organiser un échange avec RealT.",
+   cta:"presenter"},
+
+  /* 19 — Qui étudie l'opportunité */
+  {k:["qui étudie","qui etudie","qui reçoit","qui recoit","avec qui suis-je en relation","à qui je parle","a qui je parle","qui traite mon dossier"],
+   a:"Votre opportunité est transmise directement à RealT pour une première analyse. SOURCE a justement été conçue pour permettre un accès direct au promoteur-acquéreur potentiel."},
+
+  /* 20 — Interlocuteur du rendez-vous */
+  {k:["avec qui vais-je parler","qui fait le rendez-vous","mon interlocuteur","pierre tranchant","qui anime","qui me recevra","qui sera présent","qui sera present"],
+   a:"Les échanges SOURCE sont actuellement réalisés par Pierre Tranchant, de RealT SA. L'objectif est de comprendre votre opportunité, de vérifier son intérêt potentiel pour RealT et de discuter avec vous du cadre de collaboration.",
+   cta:"rdv"},
+
+  /* 21 — Durée du rendez-vous */
+  {k:["combien de temps dure","durée de l'échange","duree de l'echange","20 minutes","combien de temps le rendez-vous","format de l'échange","visioconférence","visioconference","meet"],
+   a:"L'échange dure environ 20 minutes, en visioconférence. Il permet de présenter l'opportunité, de répondre aux principales questions et de discuter des conditions de collaboration avant, si nécessaire, la transmission complète du dossier.",
+   cta:"rdv"},
+
+  /* 22 — Après le rendez-vous */
+  {k:["que se passe-t-il après","que se passe-t-il apres","la suite","et ensuite","prochaines étapes","prochaines etapes","après l'échange","apres l'echange"],
+   a:"Si RealT souhaite poursuivre l'analyse et que les parties souhaitent avancer ensemble, le cadre de collaboration est défini. Le document définitif peut ensuite être établi, puis les informations et documents nécessaires à l'analyse complète peuvent être transmis. RealT poursuit alors son étude du projet."},
+
+  /* 23 — Engagement d'achat */
+  {k:["engage à acheter","engage a acheter","engagez-vous","engagement d achat","garantie d achat","promesse d achat","allez-vous acheter","êtes-vous obligé","etes-vous oblige","certitude d achat","obligé d acheter","oblige d acheter"],
+   a:"Non. La transmission d'une opportunité, sa préqualification ou la tenue d'un échange ne constituent pas un engagement d'acquisition de la part de RealT. Chaque opportunité fait l'objet d'une analyse immobilière, technique, juridique, financière et commerciale avant une éventuelle acquisition."},
+
+  /* 24 — Données personnelles */
+  {k:["données personnelles","donnees personnelles","confidentialité","confidentialite","rgpd","lpd","mes données","mes donnees","conservation","supprimer mes données","supprimer mes donnees"],
+   a:"SOURCE limite les informations demandées lors de la première prise de contact afin de permettre une transmission progressive de l'opportunité. Pour les modalités précises de traitement des données personnelles, veuillez consulter la Politique de confidentialité SOURCE."},
+
+  /* Fiscalité — cadre général uniquement */
+  {k:["fiscal","impôt","impot","taxe","imposable","portage","déclaration","declaration","charges sociales"],
+   a:"De manière générale, une rémunération d'apport est considérée comme un revenu et doit être déclarée. Le traitement dépend notamment de votre situation personnelle et doit être confirmé. SOURCE ne fournit pas de conseil fiscal personnalisé : ce point pourra être abordé lors de l'échange, et votre fiduciaire reste l'interlocuteur pour votre cas précis."},
+
+  /* Délai de réponse */
+  {k:["combien de jours","délai de réponse","delai de reponse","quand aurai-je une réponse","jours ouvrables","vous répondez quand","vous repondez quand"],
+   a:"RealT revient vers vous sous 3 à 4 jours ouvrables après réception de votre demande."},
+
+  /* Co-investissement */
+  {k:["co-invest","investir avec vous","participer au projet","m'associer"],
+   a:"Ce point dépend de l'opportunité et des conditions convenues avec RealT. Nous pourrons le confirmer avec vous lors de l'échange. Vous pouvez le signaler dans le champ prévu au moment de réserver votre créneau.",
+   cta:"rdv"}
+];
+var FALLBACK="Ce point dépend de l'opportunité et des conditions convenues avec RealT. Nous pourrons le confirmer avec vous lors de l'échange.";
+
+function majEtatChat(){
+  var p=$("chatPanel");
+  var deploye = p.classList.contains("open") && !p.classList.contains("collapsed");
+  document.body.classList.toggle("chat-ouvert", deploye);
+}
+function toggleChat(){
+  var p=$("chatPanel");
+  if(p.classList.contains("open")&&p.classList.contains("collapsed")){
+    p.classList.remove("collapsed"); $("collapseBtn").textContent="–"; $("chatInput").focus(); majEtatChat(); return;
+  }
+  p.classList.toggle("open");
+  $("chatToggle").classList.remove("dot");
+  if(p.classList.contains("open")){ p.classList.remove("collapsed"); $("collapseBtn").textContent="–"; $("chatInput").focus(); }
+  majEtatChat();
+}
+function toggleCollapse(){
+  var p=$("chatPanel");
+  var c=p.classList.toggle("collapsed");
+  $("collapseBtn").textContent=c?"+":"–";
+  if(!c){ $("chatInput").focus(); $("chatToggle").classList.remove("dot"); }
+  majEtatChat();
+}
+function closeChat(){
+  var p=$("chatPanel");
+  p.classList.remove("open"); p.classList.remove("collapsed");
+  $("collapseBtn").textContent="–";
+  majEtatChat();
+}
+function pushMsg(text,who){
+  var b=$("chatBody");
+  var m=document.createElement("div");
+  m.className="chat-msg "+who; m.textContent=text;
+  b.appendChild(m); b.scrollTop=b.scrollHeight;
+  return m;
+}
+function pushCta(kind){
+  var b=$("chatBody");
+  var line=document.createElement("div");
+  line.className="chat-msg bot";
+  line.textContent = (kind==="rdv")
+    ? "Si vous le souhaitez, vous pouvez en discuter directement avec RealT."
+    : "Si vous le souhaitez, vous pouvez présenter l'opportunité directement à RealT.";
+  b.appendChild(line);
+
+  var btn=document.createElement("button");
+  btn.className="chat-cta";
+  if(kind==="rdv" && opp.profil){
+    btn.textContent="Planifier un échange";
+    btn.onclick=function(){ closeChat(); goSchedule(); };
+  } else {
+    btn.textContent = opp.profil ? "Reprendre ma présentation" : "Présenter mon opportunité";
+    btn.onclick=function(){
+      closeChat();
+      if(opp.profil) showScreen("screen-brief");
+      else goProfil();
+    };
+  }
+  b.appendChild(btn);
+  b.scrollTop=b.scrollHeight;
+}
+function findAnswer(q){
+  var low=q.toLowerCase(), best=null, score=0;
+  KB.forEach(function(e){
+    var sc=0;
+    e.k.forEach(function(k){ if(low.indexOf(k)>-1) sc += k.length + (k.indexOf(" ")>-1?25:0); });
+    if(sc>score){ score=sc; best=e; }
+  });
+  return (best&&score>=6)?best:null;
+}
+function askBot(q){
+  pushMsg(q,"user");
+  var t=pushMsg("…","bot");
+  setTimeout(function(){
+    var hit=findAnswer(q);
+    t.textContent = hit ? hit.a : FALLBACK;
+    $("chatBody").scrollTop=999999;
+    if(!hit) setTimeout(function(){ pushCta("rdv"); },320);
+    if(hit&&hit.cta) setTimeout(function(){ pushCta(hit.cta); },320);
+    if($("chatPanel").classList.contains("collapsed")) $("chatToggle").classList.add("dot");
+  },450);
+}
+/* Garde-fou : une même question ne peut pas partir deux fois en moins de 1,5 s.
+   Filet de sécurité — la cause réelle du doublon est corrigée dans initRecognition(). */
+var lastSubmittedMessage="", lastSubmittedTimestamp=0;
+function normalize(t){ return String(t).trim().replace(/\s+/g," ").toLowerCase(); }
+
+function sendChat(){
+  var i=$("chatInput"), v=i.value.trim();
+  if(!v) return;
+  var n=normalize(v);
+  if(n===lastSubmittedMessage && (Date.now()-lastSubmittedTimestamp)<1500) return;
+  lastSubmittedMessage=n; lastSubmittedTimestamp=Date.now();
+  if(recording && recog){ recog.abort(); stopMic(); }   // Entrée pendant la dictée : on coupe proprement
+  i.value=""; askBot(v);
+}
+
+/* =====================================================================
+   DICTÉE VOCALE — instance unique, résultats finaux uniquement, pas d'envoi auto.
+   Corrige le double envoi : l'ancienne version concaténait les résultats
+   intermédiaires ET finaux, puis envoyait depuis onend (qui pouvait suivre onerror).
+   ===================================================================== */
+var recog=null, recording=false, finalTranscript="";
+
+function initRecognition(){
+  if(recog) return recog;                       // une seule instance, handlers posés une seule fois
+  var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR) return null;
+  recog=new SR();
+  recog.lang="fr-FR";
+  recog.interimResults=true;                    // affichage progressif seulement
+  recog.continuous=false;
+  recog.maxAlternatives=1;
+
+  recog.onresult=function(e){
+    var interim="";
+    // on ne repart pas de zéro : e.resultIndex indique le premier résultat nouveau
+    for(var i=e.resultIndex;i<e.results.length;i++){
+      var seg=e.results[i][0].transcript;
+      if(e.results[i].isFinal) finalTranscript += seg;   // seul le final est conservé
+      else interim += seg;                               // l'intermédiaire n'est qu'affiché
+    }
+    $("chatInput").value=(finalTranscript+interim).replace(/\s+/g," ").trim();
+  };
+
+  recog.onerror=function(ev){
+    stopMic();
+    if(ev && ev.error==="no-speech"){
+      micHint("Je n'ai pas pu entendre correctement. Vous pouvez réessayer.");
+    } else if(ev && ev.error!=="aborted"){
+      micHint("La dictée s'est interrompue. Vous pouvez réessayer.");
+    }
+  };
+
+  // onend ne fait QUE remettre l'interface au repos : aucun envoi automatique.
+  recog.onend=function(){
+    stopMic();
+    var v=finalTranscript.replace(/\s+/g," ").trim();
+    if(v){
+      $("chatInput").value=v;                   // le texte reste dans le champ, relisible
+      $("chatInput").focus();
+    }
+  };
+  return recog;
+}
+
+function toggleMic(){
+  var r=initRecognition();
+  if(!r){ micHint("La dictée vocale n'est pas disponible dans ce navigateur. Essayez Chrome, ou écrivez votre question."); return; }
+  if(recording){ r.stop(); return; }
+  finalTranscript="";
+  $("chatInput").value="";
+  recording=true;
+  $("chatMic").classList.add("rec");
+  $("chatMic").setAttribute("aria-label","Écoute en cours");
+  $("chatInput").placeholder="Écoute…";
+  try{ r.start(); }
+  catch(err){ stopMic(); }                      // start() sur une instance déjà active
+}
+
+function stopMic(){
+  recording=false;
+  var mic=$("chatMic");
+  if(mic){ mic.classList.remove("rec"); mic.setAttribute("aria-label","Dicter la question"); }
+  $("chatInput").placeholder="Écrivez ou dictez votre question...";
+}
+
+/* message discret sous le champ, jamais dans le fil de conversation */
+var hintTimer=null;
+function micHint(txt){
+  var el=$("micHint");
+  if(!el) return;
+  el.textContent=txt;
+  el.classList.add("on");
+  clearTimeout(hintTimer);
+  hintTimer=setTimeout(function(){ el.classList.remove("on"); },4200);
+}
+
+/* Effacement des erreurs dès que la personne corrige */
+document.addEventListener("input",function(ev){
+  var id=ev.target&&ev.target.id;
+  if(!id||id.indexOf("f-")!==0) return;
+  var key=id.slice(2);
+  if(["prenom","nom","commune"].indexOf(key)>-1) clearErr(ev.target,"ferr-"+key);
+  if(key==="email" && validEmail(ev.target.value.trim())) clearErr(ev.target,"ferr-email");
+  if(key==="tel" && validPhone(ev.target.value.trim())) clearErr(ev.target,"ferr-tel");
+});
+
+/* =====================================================================
+   INITIALISATION — un seul point d'entrée, exécuté une seule fois.
+   Délégation sur document : un seul écouteur couvre les quatre cartes,
+   ce qui rend impossible le double déclenchement.
+   ===================================================================== */
+var SOURCE_INIT = false;
+
+function initSource(){
+  if(SOURCE_INIT) return;
+  SOURCE_INIT = true;
+
+  /* --- Cartes de profil --- */
+  document.addEventListener("click", function(e){
+    var cible = e.target && e.target.closest ? e.target.closest("[data-profile]") : null;
+    if(!cible) return;
+    e.preventDefault();
+    startFlow(cible.getAttribute("data-profile"));
+  });
+
+  /* --- Fonctionnalités optionnelles : isolées, jamais bloquantes --- */
+  try{ initLogo(); }        catch(err){ console.error("Logo :", err); }
+  try{ initDictee(); }      catch(err){ console.error("Dictée :", err); }
+  try{ initTelechargement(); } catch(err){ console.error("PDF :", err); }
+  try{ initCalendlyEcoute(); }  catch(err){ console.error("Calendly :", err); }
+}
+
+/* Logo officiel : remplace le lock-up de repli lorsqu'un fichier est fourni. */
+function initLogo(){
+  ["brandLogo","brandLogoCompact"].forEach(function(id){
+    var img=$(id);
+    if(img && img.getAttribute("src")){
+      img.onload=function(){ img.classList.add("ready"); var b=$("brand"); if(b) b.classList.add("has-logo"); };
+    }
+  });
+}
+
+/* Reconnaissance vocale : absente de nombreuses versions de Safari.
+   Dans ce cas le bouton disparaît — la saisie clavier reste entière. */
+function initDictee(){
+  var mic=$("chatMic");
+  if(!mic) return;
+  var dispo = !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+  if(!dispo){ mic.style.display="none"; }
+}
+
+/* Téléchargement PDF : dépend d'une ressource externe.
+   Si elle n'a pas chargé, le bouton est masqué et le parcours continue. */
+function initTelechargement(){
+  var pret = !!(window.jspdf && window.jspdf.jsPDF);
+  if(pret) return;
+  var boutons=document.querySelectorAll("[data-pdf]");
+  for(var i=0;i<boutons.length;i++) boutons[i].style.display="none";
+}
+
+if(document.readyState==="loading"){
+  document.addEventListener("DOMContentLoaded", initSource);
+} else {
+  initSource();
+}
+
+</script>
+</body>
+</html>
