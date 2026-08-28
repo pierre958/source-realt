@@ -391,52 +391,18 @@ details.more .inner{padding:4px 16px 18px;}
 .sf-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--green);text-decoration:none;}
 .sf-link:hover{text-decoration:underline;}
 
-/* ---------- ASSISTANT ---------- */
-.chat-toggle{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom));right:24px;background:var(--green);color:#fff;border:1px solid var(--green);border-radius:var(--rs);padding:0 18px;min-height:48px;font-family:var(--font-primary);font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:10px;z-index:50;box-shadow:0 4px 14px rgba(25,40,33,.14);}
-.chat-toggle:hover{background:var(--green-hover);}
-.chat-toggle.dot::after{content:'';position:absolute;top:-4px;right:-4px;width:9px;height:9px;border-radius:50%;background:var(--sand);border:2px solid var(--bg);}
-.chat-panel{position:fixed;bottom:82px;right:24px;width:352px;max-width:calc(100vw - 32px);background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 16px 40px rgba(23,26,24,.12);display:none;flex-direction:column;max-height:min(64vh,460px);z-index:50;overflow:hidden;}
-.chat-panel.open{display:flex;}
-.chat-head{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;cursor:pointer;background:var(--neutral);}
-.chat-head .ch-txt{flex:1;min-width:0;}
-.chat-head .t{font-size:14px;font-weight:600;color:var(--green);}
-.chat-head .s{font-size:12.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.chat-head .ch-actions{display:flex;gap:4px;flex-shrink:0;}
-.ch-btn{background:none;border:1px solid transparent;border-radius:6px;width:34px;height:34px;font-size:16px;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:var(--font-primary);line-height:1;}
-.ch-btn:hover{border-color:var(--line);color:var(--ink);background:var(--surface);}
-.chat-panel.collapsed .chat-body,.chat-panel.collapsed .chat-input-row,.chat-panel.collapsed .chat-disclaimer,.chat-panel.collapsed .mic-hint{display:none;}
-.chat-panel.collapsed .chat-head{border-bottom:none;}
-.chat-panel.collapsed .chat-head .s{display:none;}
-.chat-body{padding:16px;overflow-y:auto;flex:1;min-height:160px;display:flex;flex-direction:column;gap:10px;}
-.chat-msg{font-size:13.5px;padding:11px 13px;border-radius:var(--rs);max-width:90%;line-height:1.55;color:var(--ink);}
-.chat-msg.bot{background:#F5F6F4;align-self:flex-start;}
-.chat-msg.user{background:var(--green-soft);align-self:flex-end;}
-.chat-cta{align-self:flex-start;background:var(--green);color:#fff;border:none;border-radius:var(--rs);padding:0 14px;min-height:44px;font-family:var(--font-primary);font-size:13px;font-weight:600;cursor:pointer;}
-.chat-cta:hover{background:var(--green-hover);}
-.chat-input-row{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--line);}
-.chat-input-row input{flex:1;min-width:0;padding:10px 12px;font-size:14px;min-height:44px;border-radius:var(--rs);}
-.chat-mic{background:var(--surface);border:1px solid var(--line);border-radius:var(--rs);padding:0 13px;cursor:pointer;color:var(--muted);display:flex;align-items:center;min-height:44px;min-width:46px;justify-content:center;}
-.chat-mic:hover{border-color:var(--green-medium);color:var(--green);}
-.chat-mic.rec{border-color:var(--green-medium);color:var(--green);background:var(--green-soft);}
-.chat-send{background:var(--green);color:#fff;border:none;border-radius:var(--rs);padding:0 15px;min-height:44px;font-family:var(--font-primary);font-size:13.5px;font-weight:600;cursor:pointer;}
-.chat-send:hover{background:var(--green-hover);}
-.mic-hint{display:none;padding:10px 16px 0;font-size:12.5px;color:var(--green);line-height:1.45;}
-.mic-hint.on{display:block;}
-.chat-disclaimer{font-size:11.5px;color:var(--muted);padding:10px 16px;border-top:1px solid var(--line);line-height:1.5;}
-@media(max-width:640px){
-}
 
 /* =====================================================================
    MOBILE — testé à 430, 390 et 375 px
    ===================================================================== */
 @media(max-width:640px){
   /* 16px minimum : en dessous, iOS zoome automatiquement au focus du champ */
-  input,textarea,select,.chat-input-row input{font-size:16px;}
+  input,textarea,select{font-size:16px;}
   select{background-position:right 12px center;}
 }
 
 @media(max-width:560px){
-  .wrap{padding:16px 16px 92px;}
+  .wrap{padding:16px 16px 40px;}
   header.site{padding-bottom:16px;gap:10px;}
   .head-right{gap:12px;}
 
@@ -500,19 +466,7 @@ details.more .inner{padding:4px 16px 18px;}
 }
 
 /* L'assistant devient une feuille ancrée en bas, plus confortable au pouce */
-@media(max-width:640px){
-  .chat-panel{left:0;right:0;bottom:0;width:100%;max-width:100%;
-    border-radius:14px 14px 0 0;border-left:none;border-right:none;border-bottom:none;
-    padding-bottom:env(safe-area-inset-bottom);
-    max-height:calc(100vh - 80px);
-    max-height:calc(100dvh - 80px);
-    box-shadow:0 -8px 30px rgba(23,26,24,.16);}
-  .chat-head{padding:16px;}
-  .chat-body{padding:16px;min-height:180px;}
-  .chat-msg{max-width:92%;font-size:14px;}
-  .chat-toggle{bottom:calc(16px + env(safe-area-inset-bottom));right:16px;left:auto;min-height:50px;}
-  body.chat-ouvert .chat-toggle{display:none;}
-}
+
 
 /* Barre d'étapes : pastilles seules, sans défilement horizontal */
 @media(max-width:700px){
@@ -994,34 +948,7 @@ details.more .inner{padding:4px 16px 18px;}
   </div>
 </div>
 
-<!-- ASSISTANT -->
-<button class="chat-toggle" id="chatToggle" onclick="toggleChat()">
-  Assistant Source <span style="font-size:14px;line-height:1;">+</span>
-</button>
-<div class="chat-panel" id="chatPanel">
-  <div class="chat-head" onclick="toggleCollapse()">
-    <div class="ch-txt">
-      <div class="t">Assistant Source</div>
-      <div class="s">Une question sur votre opportunité ?</div>
-    </div>
-    <div class="ch-actions">
-      <button class="ch-btn" id="collapseBtn" onclick="event.stopPropagation();toggleCollapse()" title="Réduire">–</button>
-      <button class="ch-btn" onclick="event.stopPropagation();closeChat()" title="Fermer">×</button>
-    </div>
-  </div>
-  <div class="chat-body" id="chatBody">
-    <div class="chat-msg bot">Bonjour. Je réponds sur SOURCE, les critères de RealT, la rémunération, l'antériorité et le déroulé d'un dossier. Posez votre question librement.</div>
-  </div>
-  <div class="chat-input-row">
-    <input type="text" id="chatInput" placeholder="Écrivez ou dictez votre question..." autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();sendChat();}">
-    <button type="button" class="chat-mic" id="chatMic" onclick="toggleMic()" title="Dicter la question">
-      <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><rect x="6" y="1.5" width="4" height="7.5" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 7.5C3.5 10 5.5 11.5 8 11.5C10.5 11.5 12.5 10 12.5 7.5M8 11.5V14M6 14H10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-    </button>
-    <button type="button" class="chat-send" onclick="sendChat()">Envoyer <span>→</span></button>
-  </div>
-  <div class="mic-hint" id="micHint"></div>
-  <div class="chat-disclaimer">Informations générales. SOURCE ne fournit pas de conseil juridique ou fiscal personnalisé. Aucune signature ne se fait en ligne.</div>
-</div>
+
 
 <script>
 /* =====================================================================
@@ -1851,318 +1778,7 @@ function goHome(){
   setStepIndex("accueil");
 }
 
-/* ================= ASSISTANT SOURCE ================= */
-/* =====================================================================
-   BASE DE CONNAISSANCES — ASSISTANT SOURCE
-   Règle absolue : ne jamais inventer une condition commerciale, juridique,
-   fiscale ou un critère d'acquisition. Hors périmètre → FALLBACK.
-   cta:"presenter" → bouton « Présenter mon opportunité »
-   cta:"rdv"       → bouton « Réserver un échange »
-   ===================================================================== */
-var KB=[
 
-  /* 1 — Qu'est-ce que SOURCE */
-  {k:["est-ce que source","quoi source","sert source","cette plateforme","comment fonctionne source","source c est quoi","pourquoi source","parlez-moi de source","présentez source","presentez source","source"],
-   a:"SOURCE est la plateforme de sourcing immobilier de RealT SA. Elle permet aux agents immobiliers, architectes, particuliers et propriétaires de présenter directement une opportunité immobilière à RealT. L'objectif est de qualifier une première fois l'opportunité, de présenter clairement le cadre de collaboration, puis d'organiser un échange direct avec RealT, promoteur-acquéreur.",
-   cta:"presenter"},
-
-  /* 2 — Qui est RealT */
-  {k:["qui est realt","qui êtes-vous","qui etes-vous","votre société","votre societe","vous êtes qui","vous etes qui","connais pas","votre entreprise"],
-   a:"RealT SA est active dans la promotion et le développement immobilier en Suisse romande. SOURCE permet de lui présenter directement des opportunités susceptibles de correspondre à ses critères de développement et d'acquisition. Le site realt.swiss présente la société."},
-
-  /* 3 — Agence ou intermédiaire */
-  {k:["agence immobilière","agence immobiliere","êtes-vous une agence","etes-vous une agence","intermédiaire","intermediaire","courtier","marketplace","vous prenez une commission sur moi"],
-   a:"Dans le cadre de SOURCE, RealT intervient comme promoteur-acquéreur potentiel. Vous présentez donc l'opportunité directement à l'entreprise susceptible de l'acquérir et de la développer, sans intermédiaire supplémentaire."},
-
-  /* 4 — Qui peut présenter */
-  {k:["qui peut","qui peut utiliser","je suis qui","suis-je concerné","suis-je concerne","est-ce pour moi","profils"],
-   a:"SOURCE s'adresse aux agents immobiliers, aux architectes, aux professionnels disposant d'une opportunité, aux particuliers qui connaissent un propriétaire susceptible de vendre, et aux propriétaires souhaitant présenter directement leur bien à RealT.",
-   cta:"presenter"},
-
-  /* 5 — Critères */
-  {k:["quels terrains","que recherchez-vous","critère","critere","vous achetez quoi","type de bien recherché","recherchez-vous","sbp","surface minimum","zone"],
-   a:"RealT recherche du résidentiel en Suisse romande, idéalement à partir de 500 m² de surface brute de plancher, pour des opérations de 2 à une cinquantaine de lots. Les terrains conditionnés et les ventes à terme sont privilégiés, et les terrains avec permis de construire en force peuvent aussi être acquis.",
-   cta:"presenter"},
-
-  /* 5b — Confrontation d'une opportunité aux critères */
-  {k:["est-ce que ça vous intéresse","est-ce que ca vous interesse","cela vous intéresse","cela vous interesse","j'ai un terrain","j'ai un immeuble","j'ai une villa","ça correspond","ca correspond","mon terrain fait","est-ce que vous prenez"],
-   a:"Sur la base d'éléments généraux, je ne peux pas confirmer notre intérêt : chaque opportunité demande une analyse plus précise. Si elle se situe en Suisse romande, sur du résidentiel, et qu'elle présente un potentiel de développement, elle mérite d'être présentée à RealT. Même si elle s'écarte de nos critères habituels, vous pouvez nous transmettre les informations principales pour que RealT l'examine.",
-   cta:"presenter"},
-
-  /* 6 — Budget */
-  {k:["budget","jusqu'à combien","jusqu a combien","quel prix","combien pouvez-vous","capacité d'achat","capacite d'achat","montant maximum","plafond"],
-   a:"RealT étudie les opportunités au cas par cas, en fonction de leur potentiel de développement. Je ne peux pas vous indiquer de budget maximum ici."},
-
-  /* 7 — Off-market */
-  {k:["off-market","off market","déjà en vente","deja en vente","doit-il déjà être","doit-il deja etre","sur le marché","sur le marche","pas encore en vente","doit être en vente","doit etre en vente","discret","confidentiel vendeur"],
-   a:"Non, le bien n'a pas besoin d'être déjà sur le marché. SOURCE est particulièrement adaptée aux opportunités off-market ou encore peu diffusées. L'essentiel est qu'elle puisse correspondre aux critères de RealT et faire l'objet d'un échange avec le propriétaire ou ses représentants.",
-   cta:"presenter"},
-
-  /* 8 — Quelles informations transmettre */
-  {k:["adresse exacte","dois-je donner l'adresse","nom du propriétaire","nom du proprietaire","quelles informations","que dois-je transmettre","quoi fournir","quelles données","quelles donnees","documents à fournir"],
-   a:"Pas nécessairement lors de la première prise de contact. Vous pouvez commencer par transmettre les éléments qui permettent à RealT de comprendre la nature de l'opportunité. L'adresse exacte, l'identité du propriétaire et les documents sensibles peuvent être communiqués progressivement, notamment après discussion du cadre de collaboration."},
-
-  /* 9 — Protection de l'affaire */
-  {k:["comment protégez","comment protegez","contourné","contourne","court-circuit","me faire avoir","prouver que je vous ai","protection","protégée","protegee","sécuriser mon apport","securiser mon apport","confiance","me passer dessus","doubler"],
-   a:"Votre demande est enregistrée et horodatée dans SOURCE. RealT vérifie ensuite si l'opportunité était déjà connue ou avait déjà été présentée. Les conditions de collaboration peuvent être discutées avec RealT avant la transmission complète des informations sensibles. L'horodatage date la transmission effectuée via SOURCE, mais ne constitue pas à lui seul une reconnaissance automatique d'un droit à rémunération."},
-
-  /* 10 — Affaire déjà connue */
-  {k:["déjà connue","deja connue","déjà proposé","deja propose","autre promoteur","deux personnes","même affaire","meme affaire","doublon","antériorité","anteriorite"],
-   a:"RealT vérifie l'antériorité de l'opportunité afin de déterminer si elle était déjà connue ou avait déjà été présentée. En cas de correspondance ou de situation nécessitant une vérification, RealT examine le dossier avant de confirmer le cadre applicable à l'apport."},
-
-  /* 11 — Horodatage et commission */
-  {k:["horodatage","daté","date de dépôt","ça me donne droit","droit à commission","droit a commission","est-ce que ça me garantit","garantit"],
-   a:"Non. L'horodatage permet de dater la transmission effectuée via SOURCE. Il ne constitue pas à lui seul une reconnaissance automatique d'un droit à rémunération. Le droit éventuel à rémunération dépend du cadre contractuel convenu avec RealT et de la réalisation des conditions prévues."},
-
-  /* 12 — Signature */
-  {k:["dois-je signer","signer","signature","signe","engagement immédiat","je m'engage","suis-je engagé","suis-je engage"],
-   a:"Non. SOURCE permet d'abord de comprendre le fonctionnement de la collaboration et de consulter le document type correspondant à votre situation. Aucune signature n'est demandée sur SOURCE à ce stade. Les conditions peuvent être discutées avec RealT lors de l'échange, avant l'établissement du document définitif."},
-
-  /* 13 — Consulter le document */
-  {k:["consulter le mandat","voir le mandat","document type","mandat type","convention type","lire le contrat","le document avant"],
-   a:"Oui. Le document type correspondant à votre situation peut être consulté et téléchargé sur SOURCE avant l'échange avec RealT. Il présente le cadre général proposé et ne constitue pas, à ce stade, un engagement définitif des parties."},
-
-  /* 14 — Négociation des conditions */
-  {k:["négociable","negociable","négocier","negocier","modifier le mandat","discuter les conditions","conditions particulières","conditions particulieres","adapter les conditions"],
-   a:"Oui. Les conditions présentées sur SOURCE constituent le cadre standard proposé par RealT. Lorsqu'une situation particulière le justifie, elles peuvent être discutées directement avec RealT lors de l'échange. Le document définitif reprend ensuite les conditions effectivement convenues entre les parties.",
-   cta:"rdv"},
-
-  /* 15 — Rémunération agent */
-  {k:["commission agent","rémunération agent","remuneration agent","combien gagne un agent","je suis agent combien","apport d'affaires combien","combien pour un agent"],
-   a:"La rémunération standard pour un apport d'affaires réalisé par un agent immobilier est de l'ordre de 3 %. Les conditions exactes dépendent de l'opportunité et peuvent être discutées directement avec RealT lors de l'échange. La rémunération et ses conditions sont ensuite définies dans le document contractuel applicable.",
-   cta:"rdv"},
-
-  /* 16 — Rémunération particulier */
-  {k:["1%","2%","particulier combien","je suis un particulier","simple information","mise en relation","tuyau","je connais quelqu'un qui vend"],
-   a:"Pour un particulier : 1 % pour une information qualifiée, 2 % en cas de mise en relation directe avec le propriétaire. Dans les deux cas, la rémunération dépend de la réalisation effective de l'opération et des conditions prévues dans la convention."},
-
-  /* 17 — Architecte */
-  {k:["architecte","sia","honoraires","mission d'architecte","je suis architecte","étude d'implantation","etude d'implantation","bureau d'architecture"],
-   a:"Pour un architecte, les modalités de collaboration dépendent du projet, de son état d'avancement et de votre rôle actuel. Il n'y a donc pas de cadre standard imposé sur SOURCE. Présentez-nous simplement l'opportunité et nous en discuterons directement avec vous.",
-   cta:"rdv"},
-
-  /* 18 — Propriétaire */
-  {k:["je suis propriétaire","je suis proprietaire","vendre mon terrain","vendre mon bien","mon bien","proposer mon terrain","vendre directement","sans agence","commission d'agence"],
-   a:"Oui, un propriétaire peut présenter directement son bien à RealT via SOURCE. Vous êtes ainsi en relation directe avec le promoteur-acquéreur potentiel, sans passer par un apporteur d'affaires ni supporter de commission d'agence. Vous pouvez commencer par transmettre les principales caractéristiques du bien, puis organiser un échange avec RealT.",
-   cta:"presenter"},
-
-  /* 19 — Qui étudie l'opportunité */
-  {k:["qui étudie","qui etudie","qui reçoit","qui recoit","avec qui suis-je en relation","à qui je parle","a qui je parle","qui traite mon dossier"],
-   a:"Votre opportunité est transmise directement à RealT pour une première analyse. SOURCE a justement été conçue pour permettre un accès direct au promoteur-acquéreur potentiel."},
-
-  /* 20 — Interlocuteur du rendez-vous */
-  {k:["avec qui vais-je parler","qui fait le rendez-vous","mon interlocuteur","pierre tranchant","qui anime","qui me recevra","qui sera présent","qui sera present"],
-   a:"Les échanges SOURCE sont actuellement réalisés par Pierre Tranchant, de RealT SA. L'objectif est de comprendre votre opportunité, de vérifier son intérêt potentiel pour RealT et de discuter avec vous du cadre de collaboration.",
-   cta:"rdv"},
-
-  /* 21 — Durée du rendez-vous */
-  {k:["combien de temps dure","durée de l'échange","duree de l'echange","30 minutes","20 minutes","combien de temps le rendez-vous","format de l'échange","visioconférence","visioconference","meet"],
-   a:"L'échange dure environ 30 minutes, en visioconférence. Il permet de présenter l'opportunité, de répondre aux principales questions et de discuter des conditions de collaboration avant, si nécessaire, la transmission complète du dossier.",
-   cta:"rdv"},
-
-  /* 22 — Après le rendez-vous */
-  {k:["que se passe-t-il après","que se passe-t-il apres","la suite","et ensuite","prochaines étapes","prochaines etapes","après l'échange","apres l'echange"],
-   a:"Si RealT souhaite poursuivre l'analyse et que les parties souhaitent avancer ensemble, le cadre de collaboration est défini. Le document définitif peut ensuite être établi, puis les informations et documents nécessaires à l'analyse complète peuvent être transmis. RealT poursuit alors son étude du projet."},
-
-  /* 23 — Engagement d'achat */
-  {k:["engage à acheter","engage a acheter","engagez-vous","engagement d achat","garantie d achat","promesse d achat","allez-vous acheter","êtes-vous obligé","etes-vous oblige","certitude d achat","obligé d acheter","oblige d acheter"],
-   a:"Non. La transmission d'une opportunité, sa préqualification ou la tenue d'un échange ne constituent pas un engagement d'acquisition de la part de RealT. Chaque opportunité fait l'objet d'une analyse immobilière, technique, juridique, financière et commerciale avant une éventuelle acquisition."},
-
-  /* 24 — Données personnelles */
-  {k:["données personnelles","donnees personnelles","confidentialité","confidentialite","rgpd","lpd","mes données","mes donnees","conservation","supprimer mes données","supprimer mes donnees"],
-   a:"SOURCE limite les informations demandées lors de la première prise de contact afin de permettre une transmission progressive de l'opportunité. Pour les modalités précises de traitement des données personnelles, veuillez consulter la page Mentions légales et politique de confidentialité, accessible depuis le bas de la page d'accueil."},
-
-  /* Fiscalité — cadre général uniquement */
-  {k:["fiscal","impôt","impot","taxe","imposable","portage","déclaration","declaration","charges sociales"],
-   a:"De manière générale, une rémunération d'apport est considérée comme un revenu et doit être déclarée. Le traitement dépend notamment de votre situation personnelle et doit être confirmé. SOURCE ne fournit pas de conseil fiscal personnalisé : ce point pourra être abordé lors de l'échange, et votre fiduciaire reste l'interlocuteur pour votre cas précis."},
-
-  /* Délai de réponse */
-  {k:["combien de jours","délai de réponse","delai de reponse","quand aurai-je une réponse","jours ouvrables","vous répondez quand","vous repondez quand"],
-   a:"RealT revient vers vous sous 3 à 4 jours ouvrables après réception de votre demande."},
-
-  /* Co-investissement */
-  {k:["co-invest","investir avec vous","participer au projet","m'associer"],
-   a:"Ce point dépend de l'opportunité et des conditions convenues avec RealT. Nous pourrons le confirmer avec vous lors de l'échange. Vous pouvez le signaler dans le champ prévu au moment de réserver votre créneau.",
-   cta:"rdv"}
-];
-var FALLBACK="Ce point dépend de l'opportunité et des conditions convenues avec RealT. Nous pourrons le confirmer avec vous lors de l'échange.";
-
-function majEtatChat(){
-  var p=$("chatPanel");
-  var deploye = p.classList.contains("open") && !p.classList.contains("collapsed");
-  document.body.classList.toggle("chat-ouvert", deploye);
-}
-function toggleChat(){
-  var p=$("chatPanel");
-  if(p.classList.contains("open")&&p.classList.contains("collapsed")){
-    p.classList.remove("collapsed"); $("collapseBtn").textContent="–"; $("chatInput").focus(); majEtatChat(); return;
-  }
-  p.classList.toggle("open");
-  $("chatToggle").classList.remove("dot");
-  if(p.classList.contains("open")){ p.classList.remove("collapsed"); $("collapseBtn").textContent="–"; $("chatInput").focus(); }
-  majEtatChat();
-}
-function toggleCollapse(){
-  var p=$("chatPanel");
-  var c=p.classList.toggle("collapsed");
-  $("collapseBtn").textContent=c?"+":"–";
-  if(!c){ $("chatInput").focus(); $("chatToggle").classList.remove("dot"); }
-  majEtatChat();
-}
-function closeChat(){
-  var p=$("chatPanel");
-  p.classList.remove("open"); p.classList.remove("collapsed");
-  $("collapseBtn").textContent="–";
-  majEtatChat();
-}
-function pushMsg(text,who){
-  var b=$("chatBody");
-  var m=document.createElement("div");
-  m.className="chat-msg "+who; m.textContent=text;
-  b.appendChild(m); b.scrollTop=b.scrollHeight;
-  return m;
-}
-function pushCta(kind){
-  var b=$("chatBody");
-  var line=document.createElement("div");
-  line.className="chat-msg bot";
-  line.textContent = (kind==="rdv")
-    ? "Si vous le souhaitez, vous pouvez en discuter directement avec RealT."
-    : "Si vous le souhaitez, vous pouvez présenter l'opportunité directement à RealT.";
-  b.appendChild(line);
-
-  var btn=document.createElement("button");
-  btn.className="chat-cta";
-  if(kind==="rdv" && opp.profil){
-    btn.textContent="Planifier un échange";
-    btn.onclick=function(){ closeChat(); goSchedule(); };
-  } else {
-    btn.textContent = opp.profil ? "Reprendre ma présentation" : "Présenter mon opportunité";
-    btn.onclick=function(){
-      closeChat();
-      if(opp.profil) showScreen("screen-brief");
-      else goProfil();
-    };
-  }
-  b.appendChild(btn);
-  b.scrollTop=b.scrollHeight;
-}
-function findAnswer(q){
-  var low=q.toLowerCase(), best=null, score=0;
-  KB.forEach(function(e){
-    var sc=0;
-    e.k.forEach(function(k){ if(low.indexOf(k)>-1) sc += k.length + (k.indexOf(" ")>-1?25:0); });
-    if(sc>score){ score=sc; best=e; }
-  });
-  return (best&&score>=6)?best:null;
-}
-function askBot(q){
-  pushMsg(q,"user");
-  var t=pushMsg("…","bot");
-  setTimeout(function(){
-    var hit=findAnswer(q);
-    t.textContent = hit ? hit.a : FALLBACK;
-    $("chatBody").scrollTop=999999;
-    if(!hit) setTimeout(function(){ pushCta("rdv"); },320);
-    if(hit&&hit.cta) setTimeout(function(){ pushCta(hit.cta); },320);
-    if($("chatPanel").classList.contains("collapsed")) $("chatToggle").classList.add("dot");
-  },450);
-}
-/* Garde-fou : une même question ne peut pas partir deux fois en moins de 1,5 s.
-   Filet de sécurité — la cause réelle du doublon est corrigée dans initRecognition(). */
-var lastSubmittedMessage="", lastSubmittedTimestamp=0;
-function normalize(t){ return String(t).trim().replace(/\s+/g," ").toLowerCase(); }
-
-function sendChat(){
-  var i=$("chatInput"), v=i.value.trim();
-  if(!v) return;
-  var n=normalize(v);
-  if(n===lastSubmittedMessage && (Date.now()-lastSubmittedTimestamp)<1500) return;
-  lastSubmittedMessage=n; lastSubmittedTimestamp=Date.now();
-  if(recording && recog){ recog.abort(); stopMic(); }   // Entrée pendant la dictée : on coupe proprement
-  i.value=""; askBot(v);
-}
-
-/* =====================================================================
-   DICTÉE VOCALE — instance unique, résultats finaux uniquement, pas d'envoi auto.
-   Corrige le double envoi : l'ancienne version concaténait les résultats
-   intermédiaires ET finaux, puis envoyait depuis onend (qui pouvait suivre onerror).
-   ===================================================================== */
-var recog=null, recording=false, finalTranscript="";
-
-function initRecognition(){
-  if(recog) return recog;                       // une seule instance, handlers posés une seule fois
-  var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SR) return null;
-  recog=new SR();
-  recog.lang="fr-FR";
-  recog.interimResults=true;                    // affichage progressif seulement
-  recog.continuous=false;
-  recog.maxAlternatives=1;
-
-  recog.onresult=function(e){
-    var interim="";
-    // on ne repart pas de zéro : e.resultIndex indique le premier résultat nouveau
-    for(var i=e.resultIndex;i<e.results.length;i++){
-      var seg=e.results[i][0].transcript;
-      if(e.results[i].isFinal) finalTranscript += seg;   // seul le final est conservé
-      else interim += seg;                               // l'intermédiaire n'est qu'affiché
-    }
-    $("chatInput").value=(finalTranscript+interim).replace(/\s+/g," ").trim();
-  };
-
-  recog.onerror=function(ev){
-    stopMic();
-    if(ev && ev.error==="no-speech"){
-      micHint("Je n'ai pas pu entendre correctement. Vous pouvez réessayer.");
-    } else if(ev && ev.error!=="aborted"){
-      micHint("La dictée s'est interrompue. Vous pouvez réessayer.");
-    }
-  };
-
-  // onend ne fait QUE remettre l'interface au repos : aucun envoi automatique.
-  recog.onend=function(){
-    stopMic();
-    var v=finalTranscript.replace(/\s+/g," ").trim();
-    if(v){
-      $("chatInput").value=v;                   // le texte reste dans le champ, relisible
-      $("chatInput").focus();
-    }
-  };
-  return recog;
-}
-
-function toggleMic(){
-  var r=initRecognition();
-  if(!r){ micHint("La dictée vocale n'est pas disponible dans ce navigateur. Essayez Chrome, ou écrivez votre question."); return; }
-  if(recording){ r.stop(); return; }
-  finalTranscript="";
-  $("chatInput").value="";
-  recording=true;
-  $("chatMic").classList.add("rec");
-  $("chatMic").setAttribute("aria-label","Écoute en cours");
-  $("chatInput").placeholder="Écoute…";
-  try{ r.start(); }
-  catch(err){ stopMic(); }                      // start() sur une instance déjà active
-}
-
-function stopMic(){
-  recording=false;
-  var mic=$("chatMic");
-  if(mic){ mic.classList.remove("rec"); mic.setAttribute("aria-label","Dicter la question"); }
-  $("chatInput").placeholder="Écrivez ou dictez votre question...";
-}
-
-/* message discret sous le champ, jamais dans le fil de conversation */
-var hintTimer=null;
-function micHint(txt){
-  var el=$("micHint");
-  if(!el) return;
-  el.textContent=txt;
-  el.classList.add("on");
-  clearTimeout(hintTimer);
-  hintTimer=setTimeout(function(){ el.classList.remove("on"); },4200);
-}
 
 /* Effacement des erreurs dès que la personne corrige */
 document.addEventListener("input",function(ev){
@@ -2195,7 +1811,6 @@ function initSource(){
 
   /* --- Fonctionnalités optionnelles : isolées, jamais bloquantes --- */
   try{ initLogo(); }        catch(err){ console.error("Logo :", err); }
-  try{ initDictee(); }      catch(err){ console.error("Dictée :", err); }
   try{ initTelechargement(); } catch(err){ console.error("PDF :", err); }
   try{ initCalendlyEcoute(); }  catch(err){ console.error("Calendly :", err); }
 }
@@ -2210,14 +1825,7 @@ function initLogo(){
   });
 }
 
-/* Reconnaissance vocale : absente de nombreuses versions de Safari.
-   Dans ce cas le bouton disparaît — la saisie clavier reste entière. */
-function initDictee(){
-  var mic=$("chatMic");
-  if(!mic) return;
-  var dispo = !!(window.SpeechRecognition || window.webkitSpeechRecognition);
-  if(!dispo){ mic.style.display="none"; }
-}
+
 
 /* Téléchargement PDF : dépend d'une ressource externe.
    Si elle n'a pas chargé, le bouton est masqué et le parcours continue. */
