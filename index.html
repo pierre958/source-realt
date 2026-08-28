@@ -154,7 +154,11 @@ h1 .light{color:var(--muted);font-weight:400;}
 .profile-card p{font-size:13.5px;}
 
 /* Pastille d'icône : donne un point d'accroche visuel à chaque profil. */
-.profile-card .ico{height:auto;margin-bottom:14px;display:block;}
+.profile-card .cnum{order:1;}
+.profile-card .ico{order:2;height:auto;margin-bottom:14px;display:block;}
+.profile-card h3{order:3;}
+.profile-card p{order:4;}
+.profile-card .cta{order:5;}
 .profile-card .ico svg{width:26px;height:26px;padding:9px;box-sizing:content-box;
   background:var(--green-soft);border-radius:50%;transition:background .18s,transform .18s;}
 
@@ -689,11 +693,10 @@ details.more .inner{padding:4px 16px 18px;}
           <h3>Architecte</h3>
           <div class="ico">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <rect x="5" y="9" width="14" height="30" rx="3" class="ic" stroke-width="1.6"/>
-              <path d="M5 19H19M5 29H19M12 9V39" class="ic" stroke-width="1" opacity=".45"/>
-              <rect x="29" y="9" width="14" height="30" rx="3" class="ic" stroke-width="1.6"/>
-              <path d="M19 24H29" class="ic" stroke-width="1.6" stroke-linecap="round"/>
-              <circle cx="24" cy="24" r="3.6" class="ic-dot"/>
+              <rect x="5" y="10" width="29" height="28" rx="3" class="ic" stroke-width="1.6"/>
+              <path d="M5 20H34M5 29H34M15 10V38M25 10V38" class="ic" stroke-width="1" opacity=".4"/>
+              <path d="M31 34L42 23L39 20L28 31L27 35Z" class="ic" stroke-width="1.5" stroke-linejoin="round"/>
+              <circle cx="10" cy="15" r="2.6" class="ic-dot"/>
             </svg>
           </div>
           <p>Vous connaissez un projet ou une opportunité foncière ? Présentez-la directement à RealT.</p>
