@@ -1333,6 +1333,17 @@ function submitBrief(){
       return;   /* on n'avance pas : la demande n'est pas partie */
     }
 
+    /* Conversion : le formulaire est réellement parti → évènement Lead pour Meta.
+       Qualifié et non qualifié confondus à ce stade. */
+    if(res.ok && typeof fbq === "function"){
+      try{
+        fbq("track","Lead",{
+          content_name: (PROFILES[opp.profil] && PROFILES[opp.profil].name) || opp.profil,
+          content_category: opp.situation || ""
+        });
+      }catch(e){ console.error("Meta Lead :", e); }
+    }
+
     afficherRecu(res.code==="non_configure");
   });
 }
